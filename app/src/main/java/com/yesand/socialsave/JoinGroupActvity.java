@@ -3,7 +3,7 @@ package com.yesand.socialsave;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class join_Group_Actvity extends AppCompatActivity {
+public class JoinGroupActvity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

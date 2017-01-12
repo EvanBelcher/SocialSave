@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SSTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:colorPrimary">@android:color/holo_blue_dark</item>
+
+        <item name="android:colorPrimaryDark">@android:color/holo_blue_light</item>
+
+        <item name="android:colorAccent">@android:color/white</item>
+
+    </style>
+</resources>
