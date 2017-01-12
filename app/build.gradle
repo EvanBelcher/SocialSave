@@ -17,6 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    return void
 }
 
 dependencies {
@@ -26,4 +27,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.reimaginebanking.api:nessie-android-sdk:1.0.4'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }
