@@ -6,5 +6,6 @@
     <string name="joinGroup">Join a Group</string>
     <string name="createGroup">Create a Group</string>
     <string name="profile">Profile</string>
+    <string name="skip">Skip</string>
 
 </resources>
