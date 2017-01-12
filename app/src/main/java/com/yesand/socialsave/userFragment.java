@@ -2,11 +2,13 @@ package com.yesand.socialsave;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjoe64.graphview.GraphView;
+import android.widget.ProgressBar;
 
 /**
  * Created by puyus on 1/12/2017.
@@ -15,6 +17,8 @@ import com.jjoe64.graphview.GraphView;
 public class UserFragment extends TabMainFragment {
 
     private GraphView mGraphView;
+    private ProgressBar moneyLeft;
+    private SwipeRefreshLayout refresher;
 
     @Nullable
     @Override
@@ -32,6 +36,24 @@ public class UserFragment extends TabMainFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         mGraphView = (GraphView) getView().findViewById(R.id.graph);
         mGraphView.removeAllSeries();
+
+        moneyLeft = (ProgressBar) view.findViewById(R.id.progressBar);
+
+        refresher = (SwipeRefreshLayout) view.findViewById(R.id.refreshView);
+        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshPage();
+            }
+        });
+
+        refreshPage();
     }
 
+    public void refreshPage(){
+        moneyLeft.setMax(300);
+        moneyLeft.setProgress(50);
+
+        refresher.setRefreshing(false);
+    }
 }
