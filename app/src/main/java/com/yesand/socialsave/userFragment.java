@@ -6,11 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jjoe64.graphview.GraphView;
+
 /**
  * Created by puyus on 1/12/2017.
  */
 
 public class UserFragment extends TabMainFragment {
+
+    private GraphView mGraphView;
 
     @Nullable
     @Override
@@ -23,4 +27,11 @@ public class UserFragment extends TabMainFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        mGraphView = (GraphView) getView().findViewById(R.id.graph);
+        mGraphView.removeAllSeries();
+    }
+
 }
