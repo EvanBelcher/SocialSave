@@ -18,20 +18,13 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First Name"
+            android:hint="Name"
             android:textSize="20dp"
-            android:id="@+id/UserFirstName" />
+            android:id="@+id/UserFirstName"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Last Name"
-            android:textSize="20dp"
-            android:id="@+id/UserLastName" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="email"
+            android:hint="Email"
             android:layout_marginTop="10dp"
             android:textSize="20dp"
             android:id="@+id/UserEmail" />
@@ -49,6 +42,13 @@
             android:textSize="20dp"
             android:layout_marginTop="10dp"
             android:id="@+id/UserConfirmPassword" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Bank Card"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/bankId" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,17 +60,10 @@
 
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="@string/makeGroups"
-            android:id="@+id/makeGroups"/>
-        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:text="@string/skip"
-            android:id="@+id/button2" />
+            android:text="next"
+            android:textSize="30dp"/>
 
     </LinearLayout>
 
