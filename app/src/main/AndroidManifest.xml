@@ -15,6 +15,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SignUp_Activity" />
+        <activity android:name=".Groups_Activity" />
+        <activity android:name=".createAGroup_Activity" />
+        <activity android:name=".join_Group_Actvity"></activity>
     </application>
 
 </manifest>

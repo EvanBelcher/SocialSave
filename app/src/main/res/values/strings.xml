@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SocialSave</string>
+    <string name="loginButton">Login</string>
+    <string name="signButton">SignUp</string>
+    <string name="makeGroups">Join/Create a Group</string>
+    <string name="joinGroup">Join a Group</string>
+    <string name="createGroup">Create a Group</string>
+    <string name="profile">Profile</string>
+
 </resources>
