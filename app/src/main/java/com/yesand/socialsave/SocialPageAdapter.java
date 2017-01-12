@@ -85,7 +85,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
                 pageTitle = "Team";
                 break;
             case 1:
-                pageTitle = "User";
+                pageTitle = "com.yesand.socialsave.User";
                 break;
             case 2:
                 pageTitle = "Transaction";
