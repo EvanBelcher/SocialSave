@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "774358760252",
+    "firebase_url": "https://socialsave-822d9.firebaseio.com",
+    "project_id": "socialsave-822d9",
+    "storage_bucket": "socialsave-822d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774358760252:android:1f3f9494d5c1f2b2",
+        "android_client_info": {
+          "package_name": "com.yesand.socialsave"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774358760252-qs64lqibgds1arqktnncpjulk8kefmgn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yesand.socialsave",
+            "certificate_hash": "3A3691774395912DB5224058FAD06F8A7914E0D5"
+          }
+        },
+        {
+          "client_id": "774358760252-9qusbkudif0dogkqp3fmv086npn4js5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOJTjk4ehvSW2s8VSCn1D5JvEvKTX-n7k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774358760252-9qusbkudif0dogkqp3fmv086npn4js5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
