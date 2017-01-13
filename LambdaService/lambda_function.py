@@ -20,54 +20,67 @@ INCOME = 'incomePerWeek'
 NEXT_GOAL = 'nextGoal'
 NEXT_INCOME = 'nextIncomePerWeek'
 NESSIE_ID = 'nessieId'
+AMOUNT = 'amount'
+HISTORY = 'scoreHistory'
+SAVINGS = 'totalSavings'
+
+ACCOUNT_ID = '_id'
 
 MAX_USER_SCORE = 100
 PERFECT_GROUP_MULTIPLIER = 1.2
 
 def lambda_handler(request_obj, context={}):
-	score_users(FIREBASE, NESSIE_KEY)
+	score_users()
 	updateGroups()
 	return 'Returned Successfully'
 
-def score_users(firebase, nessie_key):
-    #get user ids
-    result = firebase.get('/users',None)
-    print(result)
-    for u in result:
-        cus_id = result[u][NESSIE_ID]
-        print("User: {}, ID: {}".format(u, cus_id))
-        accounts_req = "http://api.reimaginebanking.com/customers/{}/accounts?key={}".format(
-            cus_id, nessie_key)
-        accounts = json.load(urllib2.urlopen(accounts_req))
-        spending = 0
+def score_users():
+	#get user ids
+	users = FIREBASE.get(USERS,None)
+	print(users)
+	for userName in users:
+		user = users[userName]
+		userNessieId = user[NESSIE_ID]
 
-        #iterates through accounts
-        for i in range(len(accounts)):
-            account_id = accounts[i]['_id']
-            #print account_id
+		accounts_req = "http://api.reimaginebanking.com/customers/{}/accounts?key={}".format(userNessieId, NESSIE_KEY)
+		accounts = json.load(urllib2.urlopen(accounts_req))
 
-            #gets purchases per account and adds purchases to spending total
-            purchases_req = "http://api.reimaginebanking.com/accounts/{}/purchases?key={}".format(
-                account_id, nessie_key)
-            purchases = json.load(urllib2.urlopen(purchases_req))
-            for j in range(len(purchases)):
-                amt = purchases[j]['amount']
-                #print amt
-                spending += amt
+		spending = 0
 
-        #compares spending to goals
-        goal = result[u][GOAL]
-        if (spending < goal):
-        	score = MAX_USER_SCORE
-        	result[u][STREAK] += 1
-        else:
-        	score = round((goal / spending) * MAX_USER_SCORE)
-        	result[u][STREAK] = 0
+		#iterates through accounts
+		for account in accounts:
+			account_id = account[ACCOUNT_ID]
 
-        print("Spending: {}, Goal: {}, Score: {}".format(spending, goal, score))
+			#gets purchases per account and adds purchases to spending total
+			purchases_req = "http://api.reimaginebanking.com/accounts/{}/purchases?key={}".format(account_id, NESSIE_KEY)
+			purchases = json.load(urllib2.urlopen(purchases_req))
+			for purchase in purchases:
+				amount = purchase[AMOUNT]
+				#print amt
+				spending += amount
 
-        firebase.patch(USERS+ "/" +u, {SCORE:score, STREAK:result[u][STREAK], GOAL:result[u][NEXT_GOAL], INCOME:result[u][NEXT_INCOME]})
-        print (firebase.get(USERS,u))
+		#compares spending to goals
+		goal = user[GOAL]
+		if (spending < goal):
+			score = MAX_USER_SCORE
+			user[STREAK] += 1
+		else:
+			score = round((goal / spending) * MAX_USER_SCORE)
+			user[STREAK] = 0
+
+		history = user[HISTORY]
+		history.append(score)
+		if (len(history) > 7):
+			history = history[1:8]
+
+		savings = user[SAVINGS]
+		savings += goal - spending
+
+		print("Spending: {}, Goal: {}, Score: {}".format(spending, goal, score))
+
+		FIREBASE.patch(USERS+ "/" +userName, {SCORE:score, SAVINGS:savings, HISTORY:history, STREAK:user[STREAK], GOAL:user[NEXT_GOAL], INCOME:user[NEXT_INCOME]})
+		print (FIREBASE.get(USERS,userName))
+
 
 def updateGroups():
 	users = FIREBASE.get(USERS, None)
@@ -97,5 +110,5 @@ def updateGroups():
 		print(str(groupName) + ' corresponds to ' + str(group))
 
 if __name__ == '__main__':
-	score_users(FIREBASE, NESSIE_KEY)
+	score_users()
 	updateGroups()
