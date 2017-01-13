@@ -1,9 +1,12 @@
 package com.yesand.socialsave;
 
+import android.provider.ContactsContract;
+
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import com.google.firebase.database.DatabaseReference;
 
 /**
  * Created by Stephen on 1/12/2017.
@@ -14,6 +17,8 @@ public class ResourceManager {
     private static final String FIREBASE_URL = "https://socialsave-822d9.firebaseio.com/";
 
     private static final SimpleDateFormat NESSIE_DATE_FORMAT = new SimpleDateFormat("yy-MM-dd");
+
+    private static DatabaseReference CURR_USER;
 
     public static String getNessieKey(){
         return NESSIE_KEY;
@@ -30,6 +35,10 @@ public class ResourceManager {
         return NESSIE_DATE_FORMAT;
     }
 
+    public static DatabaseReference getCurrUser() { return CURR_USER; }
+
+    public static void setCurrUser(DatabaseReference user) { CURR_USER = user; }
+
     public static Calendar getStartOfThisWeek(){
         Calendar cal = Calendar.getInstance();
 
@@ -41,4 +50,5 @@ public class ResourceManager {
 
         return cal;
     }
+
 }

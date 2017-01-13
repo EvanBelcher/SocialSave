@@ -13,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MakingGoals extends AppCompatActivity {
 
-    private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     private final String INCOME_KEY = "incomePerWeek";
     private final String GOAL_KEY = "goal";
 
@@ -69,10 +68,12 @@ public class MakingGoals extends AppCompatActivity {
         else if (isYearly.isChecked()) {
             income = amt / 52;
         }
-        SignUpActivity.CURR_USER.child(INCOME_KEY).setValue(income);
+        income = Math.round(income * 100.0) / 100.0; //rounds to two decimals
+        ResourceManager.getCurrUser().child(INCOME_KEY).setValue(income);
 
         double percentage = bar.getProgress() / 10.0;
         double goal = income * percentage;
-        SignUpActivity.CURR_USER.child(GOAL_KEY).setValue(goal);
+        goal = Math.round(goal * 100.0) / 100.0;
+        ResourceManager.getCurrUser().child(GOAL_KEY).setValue(goal);
     }
 }
