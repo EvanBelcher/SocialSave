@@ -29,6 +29,7 @@ public class TabMainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // to save data with roation
         setRetainInstance(true);
+
     }
 
     @Nullable
@@ -68,9 +69,9 @@ public class TabMainFragment extends Fragment {
 
     private void setUpTab_Layout(TabLayout tab_layout)
     {
-        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
-        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.mipmap.ic_launcher)));
+        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.team_icon)));
+        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.user)));
+        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.dollar_icon)));
         tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
 
     }

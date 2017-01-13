@@ -30,7 +30,7 @@
         <ImageView
             android:layout_width="47dp"
             android:layout_height="54dp"
-            app:srcCompat="@drawable/smiley"
+            app:srcCompat="@drawable/smiley3"
 
             android:id="@+id/user_emoji">
         <!--

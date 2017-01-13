@@ -22,7 +22,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                  arrayList.add(new TeamFragment());
+                arrayList.add(new TeamFragment());
                 break;
             case 1:
                 arrayList.add(new UserFragment());
@@ -45,13 +45,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.team_icon_2;
                 break;
             case 1:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.user;
                 break;
             case 2:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.dollar_icon;
                 break;
             default:
                 icon = 0;
@@ -64,13 +64,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.team_icon_2;
                 break;
             case 1:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.user;
                 break;
             case 2:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.dollar_icon;
                 break;
             default:
                 icon = 0;
@@ -82,13 +82,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         String pageTitle;
         switch (position) {
             case 0:
-                pageTitle = "Team";
+                pageTitle = "Team Leaderboard";
                 break;
             case 1:
-                pageTitle = "com.yesand.socialsave.User";
+                pageTitle = "User Profile";
                 break;
             case 2:
-                pageTitle = "Transaction";
+                pageTitle = "Transaction History";
                 break;
             default:
                 pageTitle = null;

@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 import com.google.firebase.database.FirebaseDatabase;
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import com.google.firebase.database.DatabaseReference;
@@ -59,4 +60,7 @@ public class ResourceManager {
         return cal;
     }
 
+    public static NumberFormat getMoneyFormatter(){
+        return NumberFormat.getCurrencyInstance();
+    }
 }

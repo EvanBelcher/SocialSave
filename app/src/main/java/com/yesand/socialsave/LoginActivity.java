@@ -26,7 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        Window window = getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         final EditText login_email = (EditText)findViewById(R.id.login_email);
         final EditText login_password = (EditText)findViewById(R.id.login_password);
         final Button login = (Button)findViewById(R.id.login);

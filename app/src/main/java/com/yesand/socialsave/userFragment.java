@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.GraphViewXML;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
 import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
 import com.reimaginebanking.api.nessieandroidsdk.constants.AccountType;
@@ -65,6 +70,8 @@ public class UserFragment extends TabMainFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        myView = view;
+
         mGraphView = (GraphView) view.findViewById(R.id.graph);
         mGraphView.removeAllSeries();
 
@@ -80,9 +87,96 @@ public class UserFragment extends TabMainFragment {
                 refreshPage();
             }
         });
+
+        refreshPage();
     }
 
     public void refreshPage(){
+
+        final TextView username = (TextView) myView.findViewById(R.id.username);
+        ResourceManager.getCurrUser().child(Constants.NAME).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                username.setText((String) dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                username.setText("Happy Funtime");
+            }
+        });
+
+
+        final TextView lastScore = (TextView) myView.findViewById(R.id.last_week_score_text);
+        ResourceManager.getCurrUser().child(Constants.LAST_SCORE).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lastScore.setText("Last Week's Score: " + String.valueOf(dataSnapshot.getValue().toString()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                lastScore.setText("...");
+            }
+        });
+
+
+        final TextView totalSavings = (TextView) myView.findViewById(R.id.total_savings_text);
+        ResourceManager.getCurrUser().child(Constants.TOTAL_SAVINGS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                totalSavings.setText("Total Savings: " + ResourceManager.getMoneyFormatter().format(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                totalSavings.setText("...");
+            }
+        });
+
+
+
+        // Graph me here lol
+        final GraphViewXML graph = (GraphViewXML) myView.findViewById(R.id.graph);
+        ResourceManager.getCurrUser().child(Constants.HISTORY).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Long> objs = (ArrayList<Long>) dataSnapshot.getValue();
+
+                DataPoint[] points = new DataPoint[objs.size()];
+                for (int i = 0; i < objs.size(); i++) {
+                    points[i] = new DataPoint((double) i + 1, (Long) objs.get(i));
+                }
+
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(points);
+                graph.removeAllSeries();
+                graph.addSeries(series);
+
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+                    }
+                });
+
+                series.setSpacing(50);
+
+                series.setDrawValuesOnTop(true);
+                series.setValuesOnTopColor(Color.WHITE);
+                series.setValuesOnTopSize(50);
+
+                graph.getViewport().setYAxisBoundsManual(true);
+                graph.getViewport().setMinY(0);
+                graph.getViewport().setMaxY(110);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         ResourceManager.getCurrUser().child(Constants.NESSIE_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -128,9 +222,7 @@ public class UserFragment extends TabMainFragment {
                                                     moneyLeft.setMax((int)goal);
                                                     moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
 
-                                                    Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
-
-                                                    availibleFundsMessage.setText("$" + ((int)goal - (int)finalAmountSpent) + " left / $" + goal + " budget:");
+                                                    availibleFundsMessage.setText(ResourceManager.getMoneyFormatter().format(goal - finalAmountSpent) + " left / " + ResourceManager.getMoneyFormatter().format(goal) + " budget:");
 
                                                     refresher.setRefreshing(false);
                                                 }
@@ -162,76 +254,6 @@ public class UserFragment extends TabMainFragment {
                             }
                         });
                 queue.add(jsArrRequest);
-
-
-/*
-                ResourceManager.getNessieClient().ACCOUNT.getCustomerAccounts(customerId, new NessieResultsListener() {
-                    @Override
-                    public void onSuccess(Object result) {
-                        List<Account> accounts = (List<Account>) result;
-
-                        ResourceManager.getNessieClient().PURCHASE.getPurchasesByAccount(accounts.get(0).getId(), new NessieResultsListener() {
-                            @Override
-                            public void onSuccess(Object result) {
-                                Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
-                                SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
-
-                                List<Purchase> purchases = (List<Purchase>) result;
-
-                                double amountSpent = 0;
-                                for (Purchase purchase : purchases){
-                                    try {
-                                        Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
-
-                                        if (startOfWeek.getTime().getTime() <= date.getTime()){
-                                            amountSpent += purchase.getAmount();
-                                        }
-                                    } catch (ParseException e) {
-                                        // Handle?
-                                    }
-                                }
-
-                                final double finalAmountSpent = amountSpent;
-
-                                ResourceManager.getCurrUser().child(Constants.GOAL).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        double goal = Double.parseDouble(dataSnapshot.getValue().toString());
-
-                                        moneyLeft.setMax((int)goal);
-                                        moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
-
-                                        Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
-
-                                        availibleFundsMessage.setText("$" + (goal - finalAmountSpent) + " left / $" + goal + " budget:");
-
-                                        refresher.setRefreshing(false);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Toast.makeText(getActivity(), "Error0..." + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                        refresher.setRefreshing(false);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onFailure(NessieError error) {
-                                Toast.makeText(getActivity(), "Error1..." + error.getMessage(), Toast.LENGTH_LONG).show();
-                                refresher.setRefreshing(false);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(NessieError error) {
-                        Log.e("User Frag", error.getMessage());
-
-                        Toast.makeText(getActivity(), "Error2..." + error.getMessage(), Toast.LENGTH_LONG).show();
-                        refresher.setRefreshing(false);
-                    }
-                });*/
             }
 
             @Override
