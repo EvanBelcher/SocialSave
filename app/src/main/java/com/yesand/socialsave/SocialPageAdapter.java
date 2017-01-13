@@ -82,13 +82,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         String pageTitle;
         switch (position) {
             case 0:
-                pageTitle = "Team";
+                pageTitle = "Team LeaderBoard";
                 break;
             case 1:
-                pageTitle = "com.yesand.socialsave.User";
+                pageTitle = "Your Profile";
                 break;
             case 2:
-                pageTitle = "Transaction";
+                pageTitle = "Spending History";
                 break;
             default:
                 pageTitle = null;
