@@ -42,6 +42,7 @@
             android:hint="Password"
             android:background="#FFFFFF"
             android:textColor="#000"
+            android:inputType="textWebPassword"
             android:paddingLeft="5dp"
             android:fontFamily="sans"
             android:layout_marginTop="20dp"
