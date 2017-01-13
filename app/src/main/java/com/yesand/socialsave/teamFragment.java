@@ -11,6 +11,8 @@ import android.view.ViewGroup;
  */
 
 public class TeamFragment extends TabMainFragment {
+
+    private String teamName;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -22,4 +24,10 @@ public class TeamFragment extends TabMainFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
 }
