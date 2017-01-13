@@ -24,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener fbAuthListener;
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
     public final static String TAG = SignUpActivity.class.getSimpleName();
+    public static String CURR_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +75,8 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             else {
                                 User user = new User(username, userpw, usernessie);
-                                String key = useremail.replace('.','-');
-                                key = key.replace('@','_');
-
-                                System.out.println(dbRef.toString());
-                                System.out.println(dbRef.child("users").toString());
-                                System.out.println(dbRef.child("users").child(key).toString());
-                                dbRef.child("users").child(key).setValue(user);
+                                CURR_KEY = useremail.replace('.','-');
+                                dbRef.child("users").child(CURR_KEY).setValue(user);
                             }
                         }
                     });
