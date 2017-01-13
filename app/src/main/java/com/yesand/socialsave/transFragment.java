@@ -87,9 +87,9 @@ public class TransFragment extends TabMainFragment {
                                             List<Purchase> purchases = (List<Purchase>) result;
                                             for(Purchase purchase: purchases)
                                             {
-                                                dateOfTransaction.setText(purchase.getPurchaseDate() + "\n" + dateOfTransaction.getText());
-                                                titleTransaction.setText(purchase.getDescription() + "\n" + titleTransaction.getText().toString());
-                                                moneyTransaction.setText(ResourceManager.getMoneyFormatter().format(purchase.getAmount()) + " \n" + moneyTransaction.getText().toString());
+                                                dateOfTransaction.setText(purchase.getPurchaseDate() + "\n\n" + dateOfTransaction.getText() + "\n");
+                                                titleTransaction.setText(purchase.getDescription() + "\n\n" + titleTransaction.getText().toString() + "\n");
+                                                moneyTransaction.setText(ResourceManager.getMoneyFormatter().format(purchase.getAmount()) + "\n\n" + moneyTransaction.getText().toString());
                                             }
                                         }
                                         @Override
