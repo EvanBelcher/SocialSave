@@ -80,6 +80,49 @@ public class UserFragment extends TabMainFragment {
                 refreshPage();
             }
         });
+
+        final TextView username = (TextView) view.findViewById(R.id.username);
+        ResourceManager.getCurrUser().child(Constants.NAME).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                username.setText((String) dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                username.setText("Happy Funtime");
+            }
+        });
+
+
+        final TextView lastScore = (TextView) view.findViewById(R.id.last_week_score_text);
+        ResourceManager.getCurrUser().child(Constants.LAST_SCORE).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lastScore.setText("Last Week's Score: " + String.valueOf(dataSnapshot.getValue().toString()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                lastScore.setText("...");
+            }
+        });
+
+
+        final TextView totalSavings = (TextView) view.findViewById(R.id.total_savings_text);
+        ResourceManager.getCurrUser().child(Constants.TOTAL_SAVINGS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                totalSavings.setText("Total Savings: " + ResourceManager.getMoneyFormatter().format(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                totalSavings.setText("...");
+            }
+        });
+
+        refreshPage();
     }
 
     public void refreshPage(){
@@ -128,9 +171,7 @@ public class UserFragment extends TabMainFragment {
                                                     moneyLeft.setMax((int)goal);
                                                     moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
 
-                                                    Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
-
-                                                    availibleFundsMessage.setText("$" + ((int)goal - (int)finalAmountSpent) + " left / $" + goal + " budget:");
+                                                    availibleFundsMessage.setText(ResourceManager.getMoneyFormatter().format(goal - finalAmountSpent) + " left / " + ResourceManager.getMoneyFormatter().format(goal) + " budget:");
 
                                                     refresher.setRefreshing(false);
                                                 }
@@ -162,76 +203,6 @@ public class UserFragment extends TabMainFragment {
                             }
                         });
                 queue.add(jsArrRequest);
-
-
-/*
-                ResourceManager.getNessieClient().ACCOUNT.getCustomerAccounts(customerId, new NessieResultsListener() {
-                    @Override
-                    public void onSuccess(Object result) {
-                        List<Account> accounts = (List<Account>) result;
-
-                        ResourceManager.getNessieClient().PURCHASE.getPurchasesByAccount(accounts.get(0).getId(), new NessieResultsListener() {
-                            @Override
-                            public void onSuccess(Object result) {
-                                Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
-                                SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
-
-                                List<Purchase> purchases = (List<Purchase>) result;
-
-                                double amountSpent = 0;
-                                for (Purchase purchase : purchases){
-                                    try {
-                                        Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
-
-                                        if (startOfWeek.getTime().getTime() <= date.getTime()){
-                                            amountSpent += purchase.getAmount();
-                                        }
-                                    } catch (ParseException e) {
-                                        // Handle?
-                                    }
-                                }
-
-                                final double finalAmountSpent = amountSpent;
-
-                                ResourceManager.getCurrUser().child(Constants.GOAL).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        double goal = Double.parseDouble(dataSnapshot.getValue().toString());
-
-                                        moneyLeft.setMax((int)goal);
-                                        moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
-
-                                        Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
-
-                                        availibleFundsMessage.setText("$" + (goal - finalAmountSpent) + " left / $" + goal + " budget:");
-
-                                        refresher.setRefreshing(false);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        Toast.makeText(getActivity(), "Error0..." + databaseError.getMessage(), Toast.LENGTH_LONG).show();
-                                        refresher.setRefreshing(false);
-                                    }
-                                });
-                            }
-
-                            @Override
-                            public void onFailure(NessieError error) {
-                                Toast.makeText(getActivity(), "Error1..." + error.getMessage(), Toast.LENGTH_LONG).show();
-                                refresher.setRefreshing(false);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onFailure(NessieError error) {
-                        Log.e("User Frag", error.getMessage());
-
-                        Toast.makeText(getActivity(), "Error2..." + error.getMessage(), Toast.LENGTH_LONG).show();
-                        refresher.setRefreshing(false);
-                    }
-                });*/
             }
 
             @Override
