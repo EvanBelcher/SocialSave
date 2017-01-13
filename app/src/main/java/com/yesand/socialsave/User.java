@@ -1,5 +1,8 @@
 package com.yesand.socialsave;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Serina on 1/12/17.
  */
@@ -14,22 +17,11 @@ public class User {
     public double goal;
     public double nextGoal;
     public int score;
-    public int[] scoreHistory;
+    public List<Integer> scoreHistory;
     public int streak;
 
     public User()
     {
-        name = "";
-        password = "";
-        nessieId = "";
-        groupId = "";
-        incomePerWeek = 0.0;
-        nextIncomePerWeek = incomePerWeek;
-        goal = 0.0;
-        nextGoal = goal;
-        score = 0;
-        scoreHistory = new int[10];
-        streak = 0;
     }
     public User(String username, String userpassword, String userID)
     {
@@ -42,7 +34,7 @@ public class User {
         goal = 0.0;
         nextGoal = goal;
         score = 0;
-        scoreHistory = new int[10];
+        scoreHistory = new ArrayList<Integer>(8);
         streak = 0;
     }
 }

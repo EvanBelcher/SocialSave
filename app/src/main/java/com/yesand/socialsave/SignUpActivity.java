@@ -74,7 +74,13 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                             else {
                                 User user = new User(username, userpw, usernessie);
-                                dbRef.child("users").child(useremail.replace('.','-')).setValue(user);
+                                String key = useremail.replace('.','-');
+                                key = key.replace('@','_');
+
+                                System.out.println(dbRef.toString());
+                                System.out.println(dbRef.child("users").toString());
+                                System.out.println(dbRef.child("users").child(key).toString());
+                                dbRef.child("users").child(key).setValue(user);
                             }
                         }
                     });
