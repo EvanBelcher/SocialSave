@@ -67,6 +67,14 @@ public class TransFragment extends TabMainFragment {
         moneyTransaction = (TextView) view.findViewById(R.id.moneyTransaction);
         dateOfTransaction = (TextView) view.findViewById(R.id.dateOfTransaction);
         titleTransaction = (TextView) view.findViewById(R.id.titleTransaction);
+
+        refresher = (SwipeRefreshLayout) view.findViewById(R.id.refreshView);
+        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshPage();
+            }
+        });
     }
 
     public void refreshPage(){
@@ -91,6 +99,7 @@ public class TransFragment extends TabMainFragment {
                                                 titleTransaction.setText(purchase.getDescription() + "\n\n" + titleTransaction.getText().toString() + "\n");
                                                 moneyTransaction.setText(ResourceManager.getMoneyFormatter().format(purchase.getAmount()) + "\n\n" + moneyTransaction.getText().toString());
                                             }
+                                            refresher.setRefreshing(false);
                                         }
                                         @Override
                                         public void onFailure(NessieError error) {
