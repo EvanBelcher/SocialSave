@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="20dp"
+    android:layout_gravity="center_horizontal"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points Earned: "
+        android:layout_weight="1"
+        android:textSize="25dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="500 points"
+        android:textSize="25dp"
+        android:layout_weight="1"
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash Earned: "
+            android:layout_weight="1"
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$500"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:layout_marginTop="70dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="169dp"
+            android:layout_height="112dp"
+            android:src="@drawable/amazonGiftCard"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_height="wrap_content"
+            android:text="500 points"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:layout_marginTop="70dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="169dp"
+            android:layout_height="112dp"
+            android:src="@drawable/SJ_donation"
+            android:scaleType="fitCenter"
+            android:background="@null"
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_height="wrap_content"
+            android:text="250 points"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <Button
+        android:text="Confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:id="@+id/button1"
+        android:layout_weight="2" />
+
+    <Button
+        android:text="CANCEL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"/>
+
+</LinearLayout>
