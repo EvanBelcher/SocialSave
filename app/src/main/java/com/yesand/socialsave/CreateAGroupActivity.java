@@ -1,6 +1,5 @@
 package com.yesand.socialsave;
 
-import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CreateAGroupActivity extends AppCompatActivity {
 
     private DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+    private final String GROUP_KEY = "groupId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,12 @@ public class CreateAGroupActivity extends AppCompatActivity {
                 String groupName = group.getText().toString();
                 DatabaseReference newGroup = dbRef.child("groups").push(); //creates group
                 newGroup.child("name").setValue(groupName);
-                String groupKey = newGroup.getKey(); //gets generated key
+                String groupKey = newGroup.getKey().substring(1); //gets generated key
                 String confirmation = "Congrats on creating " + groupName + "! Here is your group id: " + groupKey
-                        +". Invite your frineds & they can join your group with this key.";
+                        +". Invite your friends & they can join your group with this key.";
                 Toast.makeText(CreateAGroupActivity.this, confirmation, Toast.LENGTH_LONG).show();
+                //TO DO: make the Toast a Dialog with an "OK" button that takes you to TeamFragment
+                ResourceManager.getCurrUser().child(GROUP_KEY).setValue(groupKey); //sets user's group
             }
         });
     }
