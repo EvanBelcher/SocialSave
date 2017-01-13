@@ -22,13 +22,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/joinGroup"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:id="@+id/joinGroup"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text= "@string/createGroup"
             android:layout_marginTop="10dp"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:id="@+id/createGroup"/>
+        />
 
     </LinearLayout>
 
@@ -45,7 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter your take home income"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:id="@+id/amount"/>
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -53,10 +57,10 @@
             android:orientation="horizontal">
 
             <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="weekly"
-            android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="weekly"
+                android:textSize="20dp"
                 android:id="@+id/weekIncome"/>
             <RadioButton
                 android:layout_width="wrap_content"
