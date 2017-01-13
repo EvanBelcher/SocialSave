@@ -10,4 +10,5 @@ public class Constants {
     public static final String NAME = "name";
     public static final String LAST_SCORE = "score";
     public static final String TOTAL_SAVINGS = "totalSavings";
+    public static final String HISTORY = "scoreHistory";
 }

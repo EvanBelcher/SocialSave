@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,6 +18,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.GraphViewXML;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
 import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
 import com.reimaginebanking.api.nessieandroidsdk.constants.AccountType;
@@ -132,11 +137,44 @@ public class UserFragment extends TabMainFragment {
 
 
         // Graph me here lol
-        //final com.jjoe64.graphview.helper.GraphViewXML graph = (com.jjoe64.graphview.helper.GraphViewXML) myView.findViewById(R.id.graph);
+        final GraphViewXML graph = (GraphViewXML) myView.findViewById(R.id.graph);
+        ResourceManager.getCurrUser().child(Constants.HISTORY).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Long> objs = (ArrayList<Long>) dataSnapshot.getValue();
 
+                DataPoint[] points = new DataPoint[objs.size()];
+                for (int i = 0; i < objs.size(); i++) {
+                    points[i] = new DataPoint((double) i + 1, (Long) objs.get(i));
+                }
 
+                BarGraphSeries<DataPoint> series = new BarGraphSeries<>(points);
+                graph.removeAllSeries();
+                graph.addSeries(series);
 
+                series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+                    @Override
+                    public int get(DataPoint data) {
+                        return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+                    }
+                });
 
+                series.setSpacing(50);
+
+                series.setDrawValuesOnTop(true);
+                series.setValuesOnTopColor(Color.WHITE);
+                series.setValuesOnTopSize(50);
+
+                graph.getViewport().setYAxisBoundsManual(true);
+                graph.getViewport().setMinY(0);
+                graph.getViewport().setMaxY(110);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         ResourceManager.getCurrUser().child(Constants.NESSIE_ID).addListenerForSingleValueEvent(new ValueEventListener() {
