@@ -147,7 +147,7 @@ public class SettingsPopupWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
                 if (editText.getText().toString().trim().equalsIgnoreCase("yes")) {
-                    Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(context.getApplicationContext(), LoginActivity.class);
                     context.startActivity(intent);
                     context.finish();
 
