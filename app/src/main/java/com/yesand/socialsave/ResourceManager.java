@@ -2,6 +2,7 @@ package com.yesand.socialsave;
 
 import android.provider.ContactsContract;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 
 import java.text.SimpleDateFormat;
@@ -18,7 +19,8 @@ public class ResourceManager {
 
     private static final SimpleDateFormat NESSIE_DATE_FORMAT = new SimpleDateFormat("yy-MM-dd");
 
-    private static DatabaseReference CURR_USER;
+    private static DatabaseReference CURR_USER = FirebaseDatabase.getInstance().getReference().
+            child("users").child("Serina_me-com"); //hardcode default
 
     public static String getNessieKey(){
         return NESSIE_KEY;
