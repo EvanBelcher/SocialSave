@@ -2,6 +2,7 @@ package com.yesand.socialsave;
 
 import android.provider.ContactsContract;
 
+import com.google.firebase.database.FirebaseDatabase;
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
 
 import java.text.SimpleDateFormat;
@@ -13,12 +14,18 @@ import com.google.firebase.database.DatabaseReference;
  */
 
 public class ResourceManager {
-    private static final String NESSIE_KEY = "df8d1057bebd8ef7053f2e96d0a52be0";
+    //private static final String NESSIE_KEY = "df8d1057bebd8ef7053f2e96d0a52be0";
+    private static final String NESSIE_KEY = "10526322a39db75baa200bace5835a37";
     private static final String FIREBASE_URL = "https://socialsave-822d9.firebaseio.com/";
 
     private static final SimpleDateFormat NESSIE_DATE_FORMAT = new SimpleDateFormat("yy-MM-dd");
 
     private static DatabaseReference CURR_USER;
+
+    static{
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        ResourceManager.setCurrUser(dbRef.child("users").child("Nikhil_email-com"));
+    }
 
     public static String getNessieKey(){
         return NESSIE_KEY;
