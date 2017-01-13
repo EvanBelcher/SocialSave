@@ -12,7 +12,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Settings"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="#fff"
         android:textSize="24dp" />
 
         <ListView
