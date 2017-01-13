@@ -64,7 +64,7 @@
         <ImageButton
             android:layout_width="169dp"
             android:layout_height="112dp"
-            android:src="@drawable/amazonGiftCard"
+            android:src="@drawable/amazon_gift_card"
             android:scaleType="fitCenter"
             android:background="@null"
             android:textSize="25dp"
@@ -91,7 +91,7 @@
         <ImageButton
             android:layout_width="169dp"
             android:layout_height="112dp"
-            android:src="@drawable/SJ_donation"
+            android:src="@drawable/sj_donation"
             android:scaleType="fitCenter"
             android:background="@null"
             android:textSize="25dp"
