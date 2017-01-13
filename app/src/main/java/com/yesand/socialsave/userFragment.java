@@ -53,6 +53,7 @@ public class UserFragment extends TabMainFragment {
         mGraphView = (GraphView) view.findViewById(R.id.graph);
         mGraphView.removeAllSeries();
 
+
         moneyLeft = (ProgressBar) view.findViewById(R.id.progressBar);
 
         availibleFundsMessage = (TextView) view.findViewById(R.id.current_saving_text);
@@ -99,7 +100,7 @@ public class UserFragment extends TabMainFragment {
 
             @Override
             public void onFailure(NessieError error) {
-                // Break?
+                // Break?z
                 refresher.setRefreshing(false);
             }
         });
