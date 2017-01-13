@@ -3,13 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/refreshView" >
+
+    <ScrollView android:layout_width="match_parent"
+        android:background="#2980B9"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:gravity="center"
     android:background="#2980B9"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/teamName" >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,23 +51,10 @@
         android:layout_gravity="center_horizontal"
         android:textSize="40dp"
         android:fontFamily="sans-serif-condensed"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:id="@+id/pointsText"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/teamName"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/teamPoints"/>
-    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -83,14 +76,14 @@
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/smiley3"
                 android:padding="10dp"
-                android:id="@+id/user_emoji3"
+                android:id="@+id/user_emoji1"
                 android:layout_weight="1">
             </ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:id="@+id/groupTeam3"
+                android:id="@+id/person1"
                 android:hint="User 1"
                 android:gravity="center"
                 android:textSize="20dp"
@@ -99,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:id="@+id/groupPoints3"
+                android:id="@+id/points1"
                 android:hint="90 points"
                 android:gravity="center"
                 android:textSize="20dp"
@@ -115,14 +108,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/smiley3"
-                android:id="@+id/user_emoji4"
+                android:id="@+id/user_emoji2"
                 android:padding="10dp"
                 android:layout_weight="1">
             </ImageView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/groupTeam4"
+                android:id="@+id/person2"
                 android:padding="10dp"
                 android:hint="User 2"
                 android:textSize="20dp"
@@ -131,7 +124,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/groupPoints4"
+                android:id="@+id/points2"
                 android:padding="10dp"
                 android:hint="90 points"
                 android:gravity="center"
@@ -145,34 +138,6 @@
             android:id="@+id/peopleDisplay5"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/frowny3"
-                android:id="@+id/user_emoji5"
-                android:padding="10dp"
-                android:layout_weight="1">
-            </ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:id="@+id/groupTeam5"
-                android:hint="User 3"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/groupPoints5"
-                android:padding="10dp"
-                android:hint="90 points"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_weight="1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -181,61 +146,12 @@
             android:id="@+id/peopleDisplay6"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/frowny3"
-                android:id="@+id/user_emoji6"
-                android:padding="10dp"
-                android:layout_weight="1">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:id="@+id/groupTeam6"
-                android:hint="User 4"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/groupPoints6"
-                android:padding="10dp"
-                android:hint="90 points"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_weight="1"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/neutral3"
-                android:padding="10dp"
-                android:layout_weight="1">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:hint="User 5"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:hint="90 points"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_weight="1"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -251,4 +167,5 @@
         android:textAllCaps="false"/>
 
 </LinearLayout>
+    </ScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
