@@ -45,7 +45,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.drawable.team_icon_2;
+                icon = R.drawable.team_icon;
                 break;
             case 1:
                 icon = R.drawable.user;
@@ -64,7 +64,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.drawable.team_icon_2;
+                icon = R.drawable.team_icon;
                 break;
             case 1:
                 icon = R.drawable.user;
