@@ -1,7 +1,7 @@
 package com.yesand.socialsave;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.Html;
@@ -17,10 +17,10 @@ import android.widget.TextView;
 
 public class SettingsPopupWindow extends PopupWindow {
 
-    public SettingsPopupWindow(String prompt, final Activity context) {
+    public SettingsPopupWindow(final String prompt, final SettingsActivity context) {
         super();
         setFocusable(true);
-        update();
+
 
         LinearLayout layout = new LinearLayout(context);
         layout.setBackgroundColor(Color.WHITE);
@@ -31,6 +31,8 @@ public class SettingsPopupWindow extends PopupWindow {
         textView.setTextSize(20);
         textView.setText(Html.fromHtml(prompt));
         layout.addView(textView);
+
+        final EditText editText = new EditText(context);
 
         if (prompt.equals("Turn Notifications Off?")) {
             Switch switcheroo = new Switch(context);
@@ -47,7 +49,6 @@ public class SettingsPopupWindow extends PopupWindow {
 
             layout.addView(switcheroo);
         } else {
-            final EditText editText = new EditText(context);
             editText.setTextSize(20);
             editText.setHint(prompt.equals("Do you really want to <b>PERMANENTLY</b> leave this group?") ? "Type \"yes\" to confirm" : "Type here");
             editText.setTextIsSelectable(true);
@@ -58,7 +59,7 @@ public class SettingsPopupWindow extends PopupWindow {
             editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
-                    if(hasFocus){
+                    if (hasFocus) {
                         InputMethodManager im = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
                         im.toggleSoftInputFromWindow(editText.getApplicationWindowToken(), InputMethodManager.SHOW_IMPLICIT, 0);
                     }
@@ -69,21 +70,72 @@ public class SettingsPopupWindow extends PopupWindow {
         }
 
         Button okButton = new Button(context);
-        okButton.setTextSize(20);
-        okButton.setText("Submit");
-        layout.addView(okButton);
+        Button joinButton = new Button(context);
+        Button createButton = new Button(context);
+        if (prompt.equals("Do you really want to <b>PERMANENTLY</b> leave this group?")) {
+            joinButton.setTextSize(20);
+            joinButton.setText("Join another group");
+            layout.addView(joinButton);
+
+            createButton.setTextSize(20);
+            createButton.setText("Create a group");
+            layout.addView(createButton);
+        } else {
+            okButton.setTextSize(20);
+            okButton.setText("Submit");
+            layout.addView(okButton);
+        }
+
 
         final PopupWindow popupWindow = this;
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String str = editText.getText().toString();
+                switch (prompt) {
+                    case "Enter a new name":
+                        ResourceManager.getCurrUser().child("name").setValue(str);
+                        break;
+                    case "Enter your projected income for <b>next week</b>":
+                        ResourceManager.getCurrUser().child("nextIncomePerWeek").setValue(str);
+                        break;
+                    case "Enter a goal for <b>next week</b>":
+                        ResourceManager.getCurrUser().child("nextGoal").setValue(str);
+                        break;
+                    case "Turn Notifications Off?":
+                        break;
+                }
+                popupWindow.dismiss();
+                context.getUserData(context);
+            }
+        });
+
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText.getText().toString().trim().equalsIgnoreCase("yes")) {
+                    Intent intent = new Intent(context.getApplicationContext(), JoinGroupActvity.class);
+                    context.startActivity(intent);
+                    context.finish();
+                }
+                popupWindow.dismiss();
+            }
+        });
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText.getText().toString().trim().equalsIgnoreCase("yes")) {
+                    Intent intent = new Intent(context.getApplicationContext(), CreateAGroupActivity.class);
+                    context.startActivity(intent);
+                    context.finish();
+                }
                 popupWindow.dismiss();
             }
         });
 
         Button cancelButton = new Button(context);
-        cancelButton.setTextSize(16);
+        cancelButton.setTextSize(18);
         cancelButton.setText("Cancel");
         layout.addView(cancelButton);
 
@@ -93,11 +145,6 @@ public class SettingsPopupWindow extends PopupWindow {
                 popupWindow.dismiss();
             }
         });
-
-        /*
-        ScrollView scrollView = new ScrollView(context);
-        scrollView.addView(layout);
-        */
 
         this.setContentView(layout);
     }
