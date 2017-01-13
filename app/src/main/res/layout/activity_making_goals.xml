@@ -48,14 +48,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter your take home income"
-            android:inputType="number"
+            android:text="Enter your take home income: "
+            android:layout_marginTop="40dp"
             android:textColor="#fff"
             android:textSize="25sp"
             android:id="@+id/amount"/>
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#fff"/>
 
         <RadioGroup
             android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -91,26 +97,21 @@
                 android:id="@+id/yearIncome"/>
         </RadioGroup>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/calculations"
-            android:textSize="20dp"
-            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
+            android:layout_marginTop="20dp"
             android:text="What percentage of your income do you want to save? "
             android:textSize="25sp"
             android:id="@+id/userGoals"/>
 
         <SeekBar
+            android:layout_marginTop="15dp"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="326dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:max="10"
             android:progress="4"
             android:background="#fff"

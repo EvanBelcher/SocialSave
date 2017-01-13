@@ -6,7 +6,6 @@ import android.view.Window;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Window window = LoginActivity.getWindow();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

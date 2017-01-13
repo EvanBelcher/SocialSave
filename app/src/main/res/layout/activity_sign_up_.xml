@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background= "#2980B9"
     tools:context="com.yesand.socialsave.SignUpActivity">
 
     <LinearLayout
@@ -19,35 +20,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
+            android:textColorHint="#000"
+            android:background="#fff"
             android:textSize="20dp"
             android:id="@+id/UserName"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="#000"
+            android:background="#fff"
             android:hint="Email"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="20dp"
             android:id="@+id/UserEmail" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="20dp"
+            android:textColorHint="#000"
+            android:background="#fff"
             android:id="@+id/userPassword" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="#000"
+            android:background="#fff"
             android:hint="Confirm Password"
             android:textSize="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:id="@+id/UserConfirmPassword" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Bank Card"
+            android:hint="Bank Card Number"
             android:textSize="20dp"
-            android:layout_marginTop="10dp"
+            android:textColorHint="#000"
+            android:background="#fff"
+            android:layout_marginTop="15dp"
             android:id="@+id/bankId" />
     </LinearLayout>
 
@@ -62,8 +73,10 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="next"
+            android:text="Create Account"
             android:textSize="30dp"
+            android:background="#A3E4D7"
+            android:padding="10dp"
             android:id="@+id/nextButton"/>
 
     </LinearLayout>
