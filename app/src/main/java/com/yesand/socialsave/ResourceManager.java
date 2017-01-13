@@ -20,7 +20,8 @@ public class ResourceManager {
 
     private static final SimpleDateFormat NESSIE_DATE_FORMAT = new SimpleDateFormat("yy-MM-dd");
 
-    private static DatabaseReference CURR_USER;
+    private static DatabaseReference CURR_USER = FirebaseDatabase.getInstance().getReference().
+            child("users").child("Serina_me-com"); //hardcode default
 
     static{
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();

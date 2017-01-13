@@ -8,22 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background= "#2980B9"
     tools:context="com.yesand.socialsave.CreateAGroupActivity">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Group Name"
+        android:hint="Enter your Group Name"
+        android:textColorHint="#fff"
         android:textSize="20dp"
         android:id="@+id/groupName"
         android:gravity="center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:enabled="false" />
+        android:enabled="true" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
+        android:background="#A3E4D7"
+
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="17dp"
