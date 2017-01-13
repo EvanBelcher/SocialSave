@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,10 +35,10 @@ public class LoginActivity extends AppCompatActivity {
                 String password = login_password.getText().toString();
                 fbAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                    public void onComplete(Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_LONG).show();
-                            //temp - go to TeamFragment
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_LONG).show();
@@ -50,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Going to sign up page", Toast.LENGTH_LONG).show();
-                //temp - go to SignUpActivity
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(intent);
             }
         });
     }

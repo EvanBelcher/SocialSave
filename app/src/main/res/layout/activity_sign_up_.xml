@@ -20,14 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:textColorHint="#000"
             android:background="#fff"
             android:textSize="20dp"
             android:id="@+id/UserName"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
             android:background="#fff"
             android:hint="Email"
             android:layout_marginTop="15dp"
@@ -39,24 +37,23 @@
             android:hint="Password"
             android:layout_marginTop="15dp"
             android:textSize="20dp"
-            android:textColorHint="#000"
             android:background="#fff"
-            android:id="@+id/userPassword" />
+            android:id="@+id/userPassword"
+            android:inputType="textWebPassword"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="#000"
             android:background="#fff"
             android:hint="Confirm Password"
             android:textSize="20dp"
             android:layout_marginTop="15dp"
-            android:id="@+id/UserConfirmPassword" />
+            android:id="@+id/UserConfirmPassword"
+            android:inputType="textWebPassword"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Bank Card Number"
             android:textSize="20dp"
-            android:textColorHint="#000"
             android:background="#fff"
             android:layout_marginTop="15dp"
             android:id="@+id/bankId" />

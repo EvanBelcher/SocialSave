@@ -30,7 +30,6 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:background="#FFFFFF"
-            android:textColor="#000"
             android:fontFamily="sans"
             android:layout_marginTop="50dp"
             android:paddingLeft="5dp"
@@ -41,12 +40,11 @@
             android:layout_height="wrap_content"
             android:hint="Password"
             android:background="#FFFFFF"
-            android:textColor="#000"
             android:paddingLeft="5dp"
             android:fontFamily="sans"
             android:layout_marginTop="20dp"
             android:textSize="20dp"
-            android:id="@+id/login_password"/>
+            android:id="@+id/login_password" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

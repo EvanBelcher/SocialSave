@@ -1,5 +1,9 @@
 package com.yesand.socialsave;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,12 +31,25 @@ public class CreateAGroupActivity extends AppCompatActivity {
                 String groupName = group.getText().toString();
                 DatabaseReference newGroup = dbRef.child("groups").push(); //creates group
                 newGroup.child("name").setValue(groupName);
-                String groupKey = newGroup.getKey().substring(1); //gets generated key
-                String confirmation = "Congrats on creating " + groupName + "! Here is your group id: " + groupKey
-                        +". Invite your friends & they can join your group with this key.";
-                Toast.makeText(CreateAGroupActivity.this, confirmation, Toast.LENGTH_LONG).show();
-                //TO DO: make the Toast a Dialog with an "OK" button that takes you to TeamFragment
+                String groupKey = newGroup.getKey().substring(1); //gets generated key, remove "-" at the beginning
                 ResourceManager.getCurrUser().child(GROUP_KEY).setValue(groupKey); //sets user's group
+
+                AlertDialog.Builder b = new AlertDialog.Builder(CreateAGroupActivity.this);
+                String report = "Congrats on creating " + groupName + "! Here is your group id: " + groupKey
+                        +". Invite your friends & they can join your group with this key.";
+                b.setMessage(report);
+                b.setPositiveButton(
+                        "OK!",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);;
+                                finish();
+                            }
+                        });
+                AlertDialog confirmation = b.create();
+                confirmation.show();
             }
         });
     }

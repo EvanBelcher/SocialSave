@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,7 +77,9 @@ public class SignUpActivity extends AppCompatActivity {
                                 String key = useremail.replace('.','-');
                                 ResourceManager.setCurrUser(dbRef.child("users").child(key));
                                 ResourceManager.getCurrUser().setValue(user);
-                                // flow - go to MakingGoals
+                                Intent intent = new Intent(getApplicationContext(), MakingGoals.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }
                     });

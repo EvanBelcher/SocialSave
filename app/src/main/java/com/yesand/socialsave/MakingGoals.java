@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,7 +34,9 @@ public class MakingGoals extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateInfo(amount, isWeekly, isMonthly, isYearly, bar);
-                // flow - go to CreateAGroupActivity
+                Intent intent = new Intent(getApplicationContext(), CreateAGroupActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -42,7 +45,9 @@ public class MakingGoals extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateInfo(amount, isWeekly, isMonthly, isYearly, bar);
-                // flow - go to JoinGroupActivity
+                Intent intent = new Intent(getApplicationContext(), JoinGroupActvity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

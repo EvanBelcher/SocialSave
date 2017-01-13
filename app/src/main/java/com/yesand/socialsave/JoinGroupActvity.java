@@ -1,5 +1,9 @@
 package com.yesand.socialsave;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,9 +40,21 @@ public class JoinGroupActvity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         String groupName = snapshot.getValue().toString();
-                        String confirmation = "Congrats! You've joined " + groupName + "!";
-                        Toast.makeText(JoinGroupActvity.this, confirmation, Toast.LENGTH_LONG).show();
-                        //TO DO: change Toast to Dialog with a button that takes you to TeamFragment
+                        AlertDialog.Builder b = new AlertDialog.Builder(JoinGroupActvity.this);
+                        String report = "Congrats! You've joined " + groupName + "!";
+                        b.setMessage(report);
+                        b.setPositiveButton(
+                                "OK!",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog confirmation = b.create();
+                        confirmation.show();
                     }
                     @Override
                     public void onCancelled(DatabaseError error) { }
