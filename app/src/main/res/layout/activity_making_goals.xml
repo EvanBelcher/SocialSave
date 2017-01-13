@@ -105,6 +105,7 @@
             android:layout_marginTop="20dp"
             android:text="What percentage of your income do you want to save? "
             android:textSize="25sp"
+            android:gravity="center"
             android:id="@+id/userGoals"/>
 
         <SeekBar
