@@ -76,6 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 String key = useremail.replace('.','-');
                                 ResourceManager.setCurrUser(dbRef.child("users").child(key));
                                 ResourceManager.getCurrUser().setValue(user);
+                                // flow - go to MakingGoals
                             }
                         }
                     });

@@ -33,6 +33,7 @@ public class MakingGoals extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateInfo(amount, isWeekly, isMonthly, isYearly, bar);
+                // flow - go to CreateAGroupActivity
             }
         });
 
@@ -41,6 +42,7 @@ public class MakingGoals extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 updateInfo(amount, isWeekly, isMonthly, isYearly, bar);
+                // flow - go to JoinGroupActivity
             }
         });
     }

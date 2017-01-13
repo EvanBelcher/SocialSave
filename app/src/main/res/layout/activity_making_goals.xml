@@ -51,13 +51,13 @@
             android:text="Enter your take home income: "
             android:layout_marginTop="40dp"
             android:textColor="#fff"
-            android:textSize="25sp"
-            android:id="@+id/amount"/>
+            android:textSize="25sp" />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="#fff"/>
+            android:background="#fff"
+            android:id="@+id/amount"/>
 
         <RadioGroup
             android:layout_width="match_parent"

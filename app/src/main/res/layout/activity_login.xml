@@ -34,7 +34,8 @@
             android:fontFamily="sans"
             android:layout_marginTop="50dp"
             android:paddingLeft="5dp"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:id="@+id/login_email"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +45,8 @@
             android:paddingLeft="5dp"
             android:fontFamily="sans"
             android:layout_marginTop="20dp"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            android:id="@+id/login_password"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +55,8 @@
             android:textColor="#000"
             android:fontFamily="sans-serif-condensed"
             android:layout_marginTop="50dp"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:id="@+id/login"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +66,8 @@
             android:background="#2980B9"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:textSize="15dp" />
+            android:textSize="15dp"
+            android:id="@+id/signup"/>
 
 
     </LinearLayout>
