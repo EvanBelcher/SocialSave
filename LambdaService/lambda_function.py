@@ -12,13 +12,14 @@ NESSIE_KEY = 'df8d1057bebd8ef7053f2e96d0a52be0'
 USERS = '/users'
 GROUPS = '/groups'
 
-GROUP_ID = 'group-id'
+GROUP_ID = 'groupId'
 SCORE = 'score'
 STREAK = 'streak'
 GOAL = 'goal'
-INCOME = 'income-per-week'
-NEXT_GOAL = 'next-goal'
-NEXT_INCOME = 'next-income'
+INCOME = 'incomePerWeek'
+NEXT_GOAL = 'nextGoal'
+NEXT_INCOME = 'nextIncomePerWeek'
+NESSIE_ID = 'nessieId'
 
 MAX_USER_SCORE = 100
 PERFECT_GROUP_MULTIPLIER = 1.2
@@ -33,7 +34,7 @@ def score_users(firebase, nessie_key):
     result = firebase.get('/users',None)
     print(result)
     for u in result:
-        cus_id = result[u]['nessie-id']
+        cus_id = result[u][NESSIE_ID]
         print("User: {}, ID: {}".format(u, cus_id))
         accounts_req = "http://api.reimaginebanking.com/customers/{}/accounts?key={}".format(
             cus_id, nessie_key)
