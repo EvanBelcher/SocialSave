@@ -70,7 +70,7 @@ public class TabMainFragment extends Fragment {
     private void setUpTab_Layout(TabLayout tab_layout)
     {
         tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.team_icon)));
-        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.user)));
+        tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.user_logo)));
         tab_layout.addTab(tab_layout.newTab().setIcon(getResources().getDrawable(R.drawable.dollar_icon)));
         tab_layout.setTabGravity(TabLayout.GRAVITY_FILL);
 
