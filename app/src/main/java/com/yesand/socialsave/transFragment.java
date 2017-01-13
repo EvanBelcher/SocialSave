@@ -23,4 +23,6 @@ public class TransFragment extends TabMainFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
+
+
 }
