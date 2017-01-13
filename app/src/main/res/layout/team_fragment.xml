@@ -19,6 +19,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Team Name"
+    android:paddingLeft="20dp"
     android:textSize="40dp"
     android:layout_gravity="center_horizontal"
     android:fontFamily="sans-serif-condensed"
@@ -40,8 +41,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="450 Points"
-        android:textSize="40dp"
+        android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
+        android:textSize="40dp"
         android:fontFamily="sans-serif-condensed"
         android:textColor="#fff"/>
 
@@ -209,14 +211,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/peopleDisplay6"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/frowny3"
-                android:id="@+id/user_emoji6"
+                app:srcCompat="@drawable/neutral3"
                 android:padding="10dp"
                 android:layout_weight="1">
             </ImageView>
@@ -224,7 +224,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="10dp"
-                android:id="@+id/groupTeam6"
                 android:hint="User 5"
                 android:gravity="center"
                 android:textSize="20dp"
@@ -232,7 +231,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/groupPoints6"
                 android:padding="10dp"
                 android:hint="90 points"
                 android:textSize="20dp"
