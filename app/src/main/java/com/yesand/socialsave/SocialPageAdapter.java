@@ -22,7 +22,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                  arrayList.add(new TeamFragment());
+                arrayList.add(new TeamFragment());
                 break;
             case 1:
                 arrayList.add(new UserFragment());
@@ -45,7 +45,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.drawable.team_icon;
+                icon = R.drawable.team_icon_2;
                 break;
             case 1:
                 icon = R.drawable.user;
@@ -64,7 +64,7 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.drawable.team_icon;
+                icon = R.drawable.team_icon_2;
                 break;
             case 1:
                 icon = R.drawable.user;
@@ -82,13 +82,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         String pageTitle;
         switch (position) {
             case 0:
-                pageTitle = "Team LeaderBoard";
+                pageTitle = "Team Leaderboard";
                 break;
             case 1:
-                pageTitle = "Your Profile";
+                pageTitle = "User Profile";
                 break;
             case 2:
-                pageTitle = "Spending History";
+                pageTitle = "Transaction History";
                 break;
             default:
                 pageTitle = null;

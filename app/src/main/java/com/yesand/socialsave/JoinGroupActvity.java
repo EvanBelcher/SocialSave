@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ public class JoinGroupActvity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join__group__actvity);
+        Window window = getWindow();
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         final EditText group = (EditText)findViewById(R.id.groupId);
         final Button confirm = (Button)findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
