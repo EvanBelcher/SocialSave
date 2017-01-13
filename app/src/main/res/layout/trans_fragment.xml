@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<ScrollView android:layout_width="match_parent"
     android:background="#2980B9"
-    android:id="@+id/refreshViewForTrans" >
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,12 +12,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Date"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
             android:textColor="#fff"
             android:textSize="20dp"/>
         <TextView
@@ -28,13 +28,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="#fff"
+            android:gravity="center"
+            android:fontFamily="sans-serif-condensed"
             android:text="Title"
             android:textSize="20dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#fff"
+            android:fontFamily="sans-serif-condensed"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="Transaction"
             android:textSize="20dp"/>
 
@@ -43,7 +47,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,6 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=""
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/dateOfTransaction"
                 android:textSize="20dp"/>
             <TextView
@@ -61,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=""
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/titleTransaction"
                 android:textSize="20dp"/>
             <TextView
@@ -68,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text=""
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/moneyTransaction"
                 android:textSize="20dp"/>
 
@@ -75,4 +83,3 @@
     </LinearLayout>
 </LinearLayout>
 </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
