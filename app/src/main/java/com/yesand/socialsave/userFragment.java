@@ -8,7 +8,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jjoe64.graphview.GraphView;
+import com.reimaginebanking.api.nessieandroidsdk.NessieError;
+import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
+import com.reimaginebanking.api.nessieandroidsdk.models.Customer;
+import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
+import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
+
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by puyus on 1/12/2017.
@@ -19,6 +33,8 @@ public class UserFragment extends TabMainFragment {
     private GraphView mGraphView;
     private ProgressBar moneyLeft;
     private SwipeRefreshLayout refresher;
+    private TextView availibleFundsMessage;
+    private View myView;
 
     @Nullable
     @Override
@@ -34,10 +50,12 @@ public class UserFragment extends TabMainFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        mGraphView = (GraphView) getView().findViewById(R.id.graph);
+        mGraphView = (GraphView) view.findViewById(R.id.graph);
         mGraphView.removeAllSeries();
 
         moneyLeft = (ProgressBar) view.findViewById(R.id.progressBar);
+
+        availibleFundsMessage = (TextView) view.findViewById(R.id.current_saving_text);
 
         refresher = (SwipeRefreshLayout) view.findViewById(R.id.refreshView);
         refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -46,14 +64,44 @@ public class UserFragment extends TabMainFragment {
                 refreshPage();
             }
         });
-
-        refreshPage();
     }
 
     public void refreshPage(){
-        moneyLeft.setMax(300);
-        moneyLeft.setProgress(50);
+        NessieClient nessieClient = ResourceManager.getNessieClient();
+        nessieClient.PURCHASE.getPurchasesByAccount("5877e1401756fc834d8ea103", new NessieResultsListener() {
+        //nessieClient.CUSTOMER.getCustomers(new NessieResultsListener() {
+            @Override
+            public void onSuccess(Object result) {
 
-        refresher.setRefreshing(false);
+                Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
+                SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
+
+                List<Purchase> purchases = (List<Purchase>) result;
+
+                double amountSpent = 0;
+                for (Purchase purchase : purchases){
+                    Toast.makeText(UserFragment.this.getActivity(), purchase.getPurchaseDate(), Toast.LENGTH_LONG).show();
+                    try {
+                        Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
+
+                        if (startOfWeek.getTime().getTime() <= date.getTime()){
+                            amountSpent += purchase.getAmount();
+                        }
+                    } catch (ParseException e) {
+                        // Handle?
+                    }
+                }
+
+                moneyLeft.setProgress((int)amountSpent);
+
+                refresher.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(NessieError error) {
+                // Break?
+                refresher.setRefreshing(false);
+            }
+        });
     }
 }
