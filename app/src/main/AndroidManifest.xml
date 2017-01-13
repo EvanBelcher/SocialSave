@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/SSTheme"
         tools:replace="android:theme">
-        <activity android:name=".MakingGoals">
+        <activity android:name=".CreateAGroupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".CreateAGroupActivity" />
+        <activity android:name=".MakingGoals" />
         <activity android:name=".JoinGroupActvity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".LogginIntoMain" />
