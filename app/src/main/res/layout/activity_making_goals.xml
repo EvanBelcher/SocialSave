@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/joinGroup"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:background="#A3E4D7"
             android:id="@+id/joinGroup"/>
         <Button
