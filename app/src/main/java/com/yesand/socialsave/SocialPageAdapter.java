@@ -45,13 +45,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.team_icon;
                 break;
             case 1:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.user;
                 break;
             case 2:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.dollar_icon;
                 break;
             default:
                 icon = 0;
@@ -64,13 +64,13 @@ public class SocialPageAdapter extends FragmentStatePagerAdapter {
         int icon;
         switch (position) {
             case 0:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.team_icon;
                 break;
             case 1:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.user;
                 break;
             case 2:
-                icon = R.mipmap.ic_launcher;
+                icon = R.drawable.dollar_icon;
                 break;
             default:
                 icon = 0;
