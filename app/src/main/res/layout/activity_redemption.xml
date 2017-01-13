@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="Points Earned: "
         android:layout_weight="1"
+        android:id="@+id/points_earned_text"
         android:textSize="25dp"
         />
     <TextView
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text="500 points"
         android:textSize="25dp"
+        android:id="@+id/numpoints_text"
         android:layout_weight="1"
         />
     </LinearLayout>
@@ -33,7 +35,6 @@
         android:orientation="horizontal"
         android:layout_weight="2"
         android:layout_gravity="center_horizontal"
-
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
 
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:text="Cash Earned: "
             android:layout_weight="1"
+            android:id="@+id/cash_earned_text"
             android:textSize="25dp"
             />
         <TextView
@@ -49,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="$500"
             android:textSize="25dp"
+            android:id="@+id/num_cash"
             android:layout_weight="1"
             />
     </LinearLayout>
@@ -57,7 +60,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:padding="5dp"
         android:layout_height="wrap_content">
 
@@ -65,6 +68,7 @@
             android:layout_width="169dp"
             android:layout_height="112dp"
             android:src="@drawable/amazon_gift_card"
+            android:id="@+id/amzn_button"
             android:scaleType="fitCenter"
             android:background="@null"
             android:textSize="25dp"
@@ -84,7 +88,7 @@
         android:orientation="horizontal"
         android:layout_gravity="center_horizontal"
         android:layout_weight="2"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="50dp"
         android:padding="5dp"
         android:layout_height="wrap_content">
 
@@ -92,6 +96,35 @@
             android:layout_width="169dp"
             android:layout_height="112dp"
             android:src="@drawable/sj_donation"
+            android:scaleType="fitCenter"
+            android:id="@+id/sj_hosp_button"
+            android:background="@null"
+            android:textSize="25dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20px"
+            android:layout_height="wrap_content"
+            android:text="250 points"
+            android:layout_gravity="center_vertical"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2"
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_width="169dp"
+            android:layout_height="112dp"
+            android:src="@drawable/wwf_logo"
+            android:id="@+id/wwf_button"
             android:scaleType="fitCenter"
             android:background="@null"
             android:textSize="25dp"
@@ -106,18 +139,6 @@
             android:layout_weight="1"
             />
     </LinearLayout>
-    <Button
-        android:text="Confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:id="@+id/button1"
-        android:layout_weight="2" />
 
-    <Button
-        android:text="CANCEL"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"/>
 
 </LinearLayout>

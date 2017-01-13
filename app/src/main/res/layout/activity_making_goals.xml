@@ -81,7 +81,8 @@
             android:id="@+id/calculations"
             android:textSize="20dp"
             />
-        <EditText
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="What percentage of your income do you want to save? "
