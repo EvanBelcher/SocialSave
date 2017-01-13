@@ -14,7 +14,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="30dp"
+            android:background="#A3E4D7"
+            android:padding="10dp"
+            android:id="@+id/nextButton"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <EditText
             android:layout_width="match_parent"
@@ -57,25 +78,6 @@
             android:background="#fff"
             android:layout_marginTop="15dp"
             android:id="@+id/bankId" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Create Account"
-            android:textSize="30dp"
-            android:background="#A3E4D7"
-            android:padding="10dp"
-            android:id="@+id/nextButton"/>
-
     </LinearLayout>
 
 

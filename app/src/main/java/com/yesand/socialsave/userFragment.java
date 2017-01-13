@@ -3,13 +3,24 @@ package com.yesand.socialsave;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.jjoe64.graphview.GraphView;
 import com.reimaginebanking.api.nessieandroidsdk.NessieError;
 import com.reimaginebanking.api.nessieandroidsdk.NessieResultsListener;
+import com.reimaginebanking.api.nessieandroidsdk.constants.AccountType;
+import com.reimaginebanking.api.nessieandroidsdk.models.Account;
 import com.reimaginebanking.api.nessieandroidsdk.models.Customer;
 import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
 import com.reimaginebanking.api.nessieandroidsdk.requestclients.NessieClient;
@@ -18,8 +29,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -68,41 +83,163 @@ public class UserFragment extends TabMainFragment {
     }
 
     public void refreshPage(){
-        NessieClient nessieClient = ResourceManager.getNessieClient();
-        nessieClient.PURCHASE.getPurchasesByAccount("5877e1401756fc834d8ea103", new NessieResultsListener() {
-        //nessieClient.CUSTOMER.getCustomers(new NessieResultsListener() {
+        ResourceManager.getCurrUser().child(Constants.NESSIE_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onSuccess(Object result) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String customerId = (String) dataSnapshot.getValue();
 
-                Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
-                SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
+                RequestQueue queue = Volley.newRequestQueue(getContext());
+                String url = "http://api.reimaginebanking.com/customers/" + customerId + "/accounts?key=" + ResourceManager.getNessieKey();
 
-                List<Purchase> purchases = (List<Purchase>) result;
+                JsonArrayRequest jsArrRequest = new JsonArrayRequest
+                        (com.android.volley.Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
 
-                double amountSpent = 0;
-                for (Purchase purchase : purchases){
-                    Toast.makeText(UserFragment.this.getActivity(), purchase.getPurchaseDate(), Toast.LENGTH_LONG).show();
-                    try {
-                        Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    ResourceManager.getNessieClient().PURCHASE.getPurchasesByAccount((String)((JSONObject) response.get(0)).get("_id"), new NessieResultsListener() {
+                                        @Override
+                                        public void onSuccess(Object result) {
+                                            Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
+                                            SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
 
-                        if (startOfWeek.getTime().getTime() <= date.getTime()){
-                            amountSpent += purchase.getAmount();
-                        }
-                    } catch (ParseException e) {
-                        // Handle?
+                                            List<Purchase> purchases = (List<Purchase>) result;
+
+                                            double amountSpent = 0;
+                                            for (Purchase purchase : purchases){
+                                                try {
+                                                    Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
+
+                                                    if (startOfWeek.getTime().getTime() <= date.getTime()){
+                                                        amountSpent += purchase.getAmount();
+                                                    }
+                                                } catch (ParseException e) {
+                                                    // Handle?
+                                                }
+                                            }
+
+                                            final double finalAmountSpent = amountSpent;
+
+                                            ResourceManager.getCurrUser().child(Constants.GOAL).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    double goal = Double.parseDouble(dataSnapshot.getValue().toString());
+
+                                                    moneyLeft.setMax((int)goal);
+                                                    moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
+
+                                                    Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
+
+                                                    availibleFundsMessage.setText("$" + ((int)goal - (int)finalAmountSpent) + " left / $" + goal + " budget:");
+
+                                                    refresher.setRefreshing(false);
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                    Toast.makeText(getActivity(), "Error0..." + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                                    refresher.setRefreshing(false);
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onFailure(NessieError error) {
+                                            Toast.makeText(getActivity(), "Error1..." + error.getMessage(), Toast.LENGTH_LONG).show();
+                                            refresher.setRefreshing(false);
+                                        }
+                                    });
+                                } catch (Exception e) {
+                                    Toast.makeText(getActivity(), "Error5..." + e.getMessage(), Toast.LENGTH_LONG).show();
+                                    refresher.setRefreshing(false);}
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getActivity(), "Error6..." + error.getMessage(), Toast.LENGTH_LONG).show();
+                                refresher.setRefreshing(false);
+                            }
+                        });
+                queue.add(jsArrRequest);
+
+
+/*
+                ResourceManager.getNessieClient().ACCOUNT.getCustomerAccounts(customerId, new NessieResultsListener() {
+                    @Override
+                    public void onSuccess(Object result) {
+                        List<Account> accounts = (List<Account>) result;
+
+                        ResourceManager.getNessieClient().PURCHASE.getPurchasesByAccount(accounts.get(0).getId(), new NessieResultsListener() {
+                            @Override
+                            public void onSuccess(Object result) {
+                                Calendar startOfWeek = ResourceManager.getStartOfThisWeek();
+                                SimpleDateFormat nessieDateFormat = ResourceManager.getNessieDateFormat();
+
+                                List<Purchase> purchases = (List<Purchase>) result;
+
+                                double amountSpent = 0;
+                                for (Purchase purchase : purchases){
+                                    try {
+                                        Date date = nessieDateFormat.parse(purchase.getPurchaseDate());
+
+                                        if (startOfWeek.getTime().getTime() <= date.getTime()){
+                                            amountSpent += purchase.getAmount();
+                                        }
+                                    } catch (ParseException e) {
+                                        // Handle?
+                                    }
+                                }
+
+                                final double finalAmountSpent = amountSpent;
+
+                                ResourceManager.getCurrUser().child(Constants.GOAL).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        double goal = Double.parseDouble(dataSnapshot.getValue().toString());
+
+                                        moneyLeft.setMax((int)goal);
+                                        moneyLeft.setProgress(Math.max(0, (int)goal - (int)finalAmountSpent));
+
+                                        Toast.makeText(getActivity(), "" + finalAmountSpent, Toast.LENGTH_LONG).show();
+
+                                        availibleFundsMessage.setText("$" + (goal - finalAmountSpent) + " left / $" + goal + " budget:");
+
+                                        refresher.setRefreshing(false);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        Toast.makeText(getActivity(), "Error0..." + databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                                        refresher.setRefreshing(false);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onFailure(NessieError error) {
+                                Toast.makeText(getActivity(), "Error1..." + error.getMessage(), Toast.LENGTH_LONG).show();
+                                refresher.setRefreshing(false);
+                            }
+                        });
                     }
-                }
 
-                moneyLeft.setProgress((int)amountSpent);
+                    @Override
+                    public void onFailure(NessieError error) {
+                        Log.e("User Frag", error.getMessage());
 
-                refresher.setRefreshing(false);
+                        Toast.makeText(getActivity(), "Error2..." + error.getMessage(), Toast.LENGTH_LONG).show();
+                        refresher.setRefreshing(false);
+                    }
+                });*/
             }
 
             @Override
-            public void onFailure(NessieError error) {
-                // Break?z
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Error3...", Toast.LENGTH_LONG).show();
                 refresher.setRefreshing(false);
             }
         });
+        Toast.makeText(getActivity(), "Waiting...", Toast.LENGTH_LONG);
     }
 }
