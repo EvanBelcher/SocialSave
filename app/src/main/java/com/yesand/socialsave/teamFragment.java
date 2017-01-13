@@ -63,10 +63,11 @@ public class TeamFragment extends TabMainFragment {
                         for (String userName : users.keySet()){
                             HashMap<String, Object> user = (HashMap<String, Object>) users.get(userName);
                             if (user.get(Constants.GROUP_ID).equals(groupId)){
-                                if ((Long) user.get(Constants.LAST_SCORE) > 80){
+                                double lastScore = Double.parseDouble(String.valueOf(user.get(Constants.LAST_SCORE)));
+                                if (lastScore > 80){
                                     // Happy
                                 }
-                                else if ((Long) user.get(Constants.LAST_SCORE) > 50){
+                                else if (lastScore > 50){
                                     // Meh
                                 }
                                 else{
