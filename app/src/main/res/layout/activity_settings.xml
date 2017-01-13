@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background= "#2980B9"
     android:orientation="vertical">
 
     <TextView
@@ -11,7 +12,7 @@
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:text="Settings"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textColor="#fff"
         android:textSize="24dp" />
 
         <ListView

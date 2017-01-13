@@ -1,5 +1,6 @@
 package com.yesand.socialsave;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsPopupWindow extends PopupWindow {
 
@@ -74,6 +76,7 @@ public class SettingsPopupWindow extends PopupWindow {
         Button okButton = new Button(context);
         Button joinButton = new Button(context);
         Button createButton = new Button(context);
+        Button deactivateButton = new Button(context);
         if (prompt.equals("Do you really want to <b>PERMANENTLY</b> leave this group?")) {
             joinButton.setTextSize(20);
             joinButton.setText("Join another group");
@@ -82,6 +85,11 @@ public class SettingsPopupWindow extends PopupWindow {
             createButton.setTextSize(20);
             createButton.setText("Create a group");
             layout.addView(createButton);
+
+            deactivateButton.setTextSize(20);
+            deactivateButton.setText(Html.fromHtml("<b>PERMANENTLY Deactivate your Account</b>"));
+            deactivateButton.setTextColor(Color.RED);
+            layout.addView(deactivateButton);
         } else {
             okButton.setTextSize(20);
             okButton.setText("Submit");
@@ -133,6 +141,30 @@ public class SettingsPopupWindow extends PopupWindow {
                     context.finish();
                 }
                 popupWindow.dismiss();
+            }
+        });
+        deactivateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editText.getText().toString().trim().equalsIgnoreCase("yes")) {
+                    Intent intent = new Intent(context.getApplicationContext(), LoginActivity.class);
+                    context.startActivity(intent);
+                    context.finish();
+
+                    // 1. Instantiate an AlertDialog.Builder with its constructor
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+// 2. Chain together various setter methods to set the dialog characteristics
+                    builder.setMessage("You have successfully deactivated your account. We're sad to see you go :(")
+                            .setTitle("Until Next Time!");
+
+// 3. Get the AlertDialog from create()
+                    AlertDialog dialog = builder.create();
+
+                    ResourceManager.getCurrUser().removeValue();
+                }
+                popupWindow.dismiss();
+
             }
         });
 

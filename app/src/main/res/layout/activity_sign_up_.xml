@@ -49,14 +49,14 @@
             android:layout_height="wrap_content"
             android:background="#fff"
             android:hint="Email"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:textSize="20dp"
             android:id="@+id/UserEmail" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:textSize="20dp"
             android:background="#fff"
             android:id="@+id/userPassword"
@@ -67,7 +67,7 @@
             android:background="#fff"
             android:hint="Confirm Password"
             android:textSize="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/UserConfirmPassword"
             android:inputType="textWebPassword"/>
         <EditText
@@ -76,7 +76,7 @@
             android:hint="Bank Card Number"
             android:textSize="20dp"
             android:background="#fff"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/bankId" />
     </LinearLayout>
 
