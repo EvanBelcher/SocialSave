@@ -65,6 +65,8 @@ public class UserFragment extends TabMainFragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        myView = view;
+
         mGraphView = (GraphView) view.findViewById(R.id.graph);
         mGraphView.removeAllSeries();
 
@@ -81,7 +83,12 @@ public class UserFragment extends TabMainFragment {
             }
         });
 
-        final TextView username = (TextView) view.findViewById(R.id.username);
+        refreshPage();
+    }
+
+    public void refreshPage(){
+
+        final TextView username = (TextView) myView.findViewById(R.id.username);
         ResourceManager.getCurrUser().child(Constants.NAME).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -95,7 +102,7 @@ public class UserFragment extends TabMainFragment {
         });
 
 
-        final TextView lastScore = (TextView) view.findViewById(R.id.last_week_score_text);
+        final TextView lastScore = (TextView) myView.findViewById(R.id.last_week_score_text);
         ResourceManager.getCurrUser().child(Constants.LAST_SCORE).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -109,7 +116,7 @@ public class UserFragment extends TabMainFragment {
         });
 
 
-        final TextView totalSavings = (TextView) view.findViewById(R.id.total_savings_text);
+        final TextView totalSavings = (TextView) myView.findViewById(R.id.total_savings_text);
         ResourceManager.getCurrUser().child(Constants.TOTAL_SAVINGS).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -122,10 +129,16 @@ public class UserFragment extends TabMainFragment {
             }
         });
 
-        refreshPage();
-    }
 
-    public void refreshPage(){
+
+        // Graph me here lol
+        //final com.jjoe64.graphview.helper.GraphViewXML graph = (com.jjoe64.graphview.helper.GraphViewXML) myView.findViewById(R.id.graph);
+
+
+
+
+
+
         ResourceManager.getCurrUser().child(Constants.NESSIE_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
