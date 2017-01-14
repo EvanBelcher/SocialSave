@@ -13,6 +13,7 @@
         <activity android:name=".user.create.MakingGoals" />
         <activity android:name=".user.create.SignUpActivity" />
         <activity android:name=".MainActivity"/>
+        <activity android:name=".group.RedemptionActivity"/>
         <activity android:name=".user.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -167,7 +167,8 @@
         android:text="Redeem"
         android:layout_marginTop="70dp"
         android:background="#A3E4D7"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        android:id="@+id/redeem_button" />
 
 </LinearLayout>
     </ScrollView>

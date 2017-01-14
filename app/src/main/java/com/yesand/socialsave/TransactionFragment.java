@@ -26,6 +26,10 @@ import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,7 +94,22 @@ public class TransactionFragment extends TabMainFragment {
                                         @Override
                                         public void onSuccess(Object result) {
                                             @SuppressWarnings("unchecked") List<Purchase> purchases = (List<Purchase>) result;
+                                            Collections.sort(purchases, new Comparator<Purchase>() {
+                                                @Override
+                                                public int compare(Purchase o1, Purchase o2) {
+                                                    try {
+                                                        Date date1 = ResourceManager.getNessieDateFormat().parse(o1.getPurchaseDate());
+                                                        Date date2 = ResourceManager.getNessieDateFormat().parse(o2.getPurchaseDate());
+                                                        return date1.compareTo(date2);
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    return 0;
+                                                }
+                                            });
+
                                             for (Purchase purchase : purchases) {
+                                                System.out.println(purchase.getPurchaseDate());
                                                 dateOfTransaction.setText(purchase.getPurchaseDate() + "\n\n" + dateOfTransaction.getText() + "\n");
                                                 titleTransaction.setText(purchase.getDescription() + "\n\n" + titleTransaction.getText().toString() + "\n");
                                                 moneyTransaction.setText(ResourceManager.getMoneyFormatter().format(purchase.getAmount()) + "\n\n" + moneyTransaction.getText().toString());

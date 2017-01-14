@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yesand.socialsave.group.RedemptionActivity;
 import com.yesand.socialsave.settings.SettingsActivity;
 
 import java.util.HashMap;
@@ -50,6 +52,15 @@ public class GroupFragment extends TabMainFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button redeemButton = (Button) getView().findViewById(R.id.redeem_button);
+        redeemButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), RedemptionActivity.class);
                 startActivity(intent);
             }
         });
