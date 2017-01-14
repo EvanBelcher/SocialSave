@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background= "#2980B9"
-    tools:context="com.yesand.socialsave.MakingGoals">
+    tools:context="com.yesand.socialsave.user.create.MakingGoals">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,8 +1,8 @@
-package com.yesand.socialsave;
+package com.yesand.socialsave.group.join;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,13 +10,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.DatabaseError;
+import com.yesand.socialsave.MainActivity;
+import com.yesand.socialsave.R;
+import com.yesand.socialsave.ResourceManager;
 
 public class JoinGroupActvity extends AppCompatActivity {
 
@@ -28,18 +30,19 @@ public class JoinGroupActvity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join__group__actvity);
         Window window = getWindow();
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
-        final EditText group = (EditText)findViewById(R.id.groupId);
-        final Button confirm = (Button)findViewById(R.id.confirm);
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        final EditText group = (EditText) findViewById(R.id.groupId);
+        final Button confirm = (Button) findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String groupId = "-" + group.getText().toString();
+                String groupId = group.getText().toString();
+                if (groupId.charAt(0) != '-')
+                    groupId = "-" + groupId;
                 ResourceManager.getCurrUser().child(GROUP_KEY).setValue(groupId); //sets user's group
 
                 DatabaseReference nameRef = dbRef.child("groups").child(groupId).child("name");
-                nameRef.addListenerForSingleValueEvent(new ValueEventListener()
-                {
+                nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         String groupName = snapshot.getValue().toString();
@@ -59,8 +62,10 @@ public class JoinGroupActvity extends AppCompatActivity {
                         AlertDialog confirmation = b.create();
                         confirmation.show();
                     }
+
                     @Override
-                    public void onCancelled(DatabaseError error) { }
+                    public void onCancelled(DatabaseError error) {
+                    }
                 });
             }
         });

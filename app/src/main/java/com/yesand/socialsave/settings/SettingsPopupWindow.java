@@ -1,10 +1,11 @@
-package com.yesand.socialsave;
+package com.yesand.socialsave.settings;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
@@ -15,13 +16,19 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class SettingsPopupWindow extends PopupWindow {
+import com.yesand.socialsave.group.create.CreateAGroupActivity;
+import com.yesand.socialsave.group.join.JoinGroupActvity;
+import com.yesand.socialsave.user.login.LoginActivity;
+import com.yesand.socialsave.R;
+import com.yesand.socialsave.ResourceManager;
+
+@SuppressWarnings("deprecation")
+class SettingsPopupWindow extends PopupWindow {
 
     //plsupdate
 
-    public SettingsPopupWindow(final String prompt, final SettingsActivity context) {
+    SettingsPopupWindow(final String prompt, final SettingsActivity context) {
         super();
         setFocusable(true);
 
@@ -45,8 +52,8 @@ public class SettingsPopupWindow extends PopupWindow {
             switcheroo.setTextOff("OFF");
             switcheroo.setTextOn("ON");
             switcheroo.setShowText(true);
-            Drawable thumb = context.getResources().getDrawable(R.drawable.thumb);
-            Drawable track = context.getResources().getDrawable(R.drawable.track);
+            Drawable thumb = ResourcesCompat.getDrawable(context.getResources(), R.drawable.thumb, null);
+            Drawable track = ResourcesCompat.getDrawable(context.getResources(), R.drawable.track, null);
             switcheroo.setTrackDrawable(track);
             switcheroo.setThumbDrawable(thumb);
             switcheroo.setSwitchMinWidth(350);
@@ -158,8 +165,7 @@ public class SettingsPopupWindow extends PopupWindow {
                     builder.setMessage("You have successfully deactivated your account. We're sad to see you go :(")
                             .setTitle("Until Next Time!");
 
-// 3. Get the AlertDialog from create()
-                    AlertDialog dialog = builder.create();
+                    builder.create().show();
 
                     ResourceManager.getCurrUser().removeValue();
                 }

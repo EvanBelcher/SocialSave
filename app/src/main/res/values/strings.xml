@@ -7,5 +7,6 @@
     <string name="createGroup">Create a Group</string>
     <string name="confirm">Confirm</string>
     <string name="skip">Skip</string>
+    <string name="appname">SocialSave</string>
 
 </resources>

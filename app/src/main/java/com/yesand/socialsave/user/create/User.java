@@ -1,4 +1,4 @@
-package com.yesand.socialsave;
+package com.yesand.socialsave.user.create;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.List;
  * Created by Serina on 1/12/17.
  */
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class User {
     public String name;
     public String password;
@@ -34,7 +35,7 @@ public class User {
         goal = 0.0;
         nextGoal = goal;
         score = 0;
-        scoreHistory = new ArrayList<Integer>(8);
+        scoreHistory = new ArrayList<>(8);
         streak = 0;
     }
 }

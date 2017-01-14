@@ -1,9 +1,10 @@
-package com.yesand.socialsave;
+package com.yesand.socialsave.settings;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.Gravity;
@@ -17,6 +18,8 @@ import android.widget.PopupWindow;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.yesand.socialsave.R;
+import com.yesand.socialsave.ResourceManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         Window window = getWindow();
-        window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
 
         getUserData(this);
 
@@ -46,7 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
                 String nextIncomePerWeek = dataSnapshot.child("nextIncomePerWeek").getValue().toString();
                 String goal = dataSnapshot.child("goal").getValue().toString();
                 String nextGoal = dataSnapshot.child("nextGoal").getValue().toString();
-                String groupId = dataSnapshot.child("groupId").getValue().toString().substring(1);
+                String groupId = dataSnapshot.child("groupId").getValue().toString();
+                if (groupId.charAt(0) == '-')
+                    groupId = groupId.substring(1);
 
                 NumberFormat df = DecimalFormat.getCurrencyInstance();
 
