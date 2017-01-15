@@ -31,10 +31,10 @@ public class CreateAGroupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_a_group_);
+        setContentView(R.layout.activity_create_a_group);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-        final EditText group = (EditText) findViewById(R.id.groupName);
+        final EditText group = (EditText) findViewById(R.id.createGroup_groupName);
         final Button create = (Button) findViewById(R.id.create);
         final Activity activity = this;
         create.setOnClickListener(new View.OnClickListener() {
