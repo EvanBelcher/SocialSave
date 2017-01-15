@@ -15,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter your Group Name"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:id="@+id/groupName"
         android:gravity="center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:enabled="true" />
+        android:enabled="true"
+        tools:ignore="HardcodedText" />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/refreshView" >
@@ -13,7 +14,7 @@
     android:id="@+id/user_fragment"
     android:layout_width="match_parent"
     android:background="#2980B9"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -31,8 +32,9 @@
             android:layout_width="47dp"
             android:layout_height="54dp"
             app:srcCompat="@drawable/smiley3"
-
-            android:id="@+id/user_emoji">
+            android:contentDescription="Emoji"
+            android:id="@+id/user_emoji"
+            tools:ignore="HardcodedText">
         <!--
         android:layout_marginStart="33dp"
         android:layout_marginTop="19dp"
@@ -43,10 +45,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User's Name"
+            tools:ignore="HardcodedText,InefficientWeight"
             android:id="@+id/username"
             android:textColor="#fff"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:textSize="25sp"
             android:fontFamily="Arial"
             android:layout_weight="1">
@@ -57,8 +60,8 @@
             android:src="@drawable/gear"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/top_bar"
+            android:contentDescription="Settings"
+            tools:ignore="HardcodedText"
             android:layout_marginStart="83dp"
             android:id="@+id/account_settings_icon" />
 </LinearLayout>
@@ -68,21 +71,22 @@
         android:text="Last Week's Score:"
         android:layout_below="@id/top_bar"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:textColor="#fff"
         android:textSize="14sp"
         android:fontFamily="Arial"
         android:id="@+id/last_week_score_text"
-        android:layout_weight="1">
+        tools:ignore="HardcodedText">
     </TextView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Savings: "
+        tools:ignore="HardcodedText"
         android:textColor="#fff"
         android:layout_below="@+id/last_week_score_text"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:textSize="14sp"
         android:fontFamily="Arial"
         android:id="@+id/total_savings_text">
@@ -100,10 +104,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="$180 left / $300 budget: "
+        tools:ignore="HardcodedText"
         android:layout_below="@+id/progressBar"
         android:textColor="#fff"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:textSize="25sp"
         android:fontFamily="Arial"
         android:id="@+id/current_saving_text">

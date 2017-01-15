@@ -13,7 +13,8 @@
         android:gravity="center"
         android:text="Settings"
         android:textColor="#fff"
-        android:textSize="24dp" />
+        android:textSize="24sp"
+        tools:ignore="HardcodedText" />
 
         <ListView
             android:id="@+id/list_view_thing"

@@ -1,175 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/refreshView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/refreshView" >
+    android:layout_height="match_parent">
 
-    <ScrollView android:layout_width="match_parent"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/groupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#2980B9"
-        android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android" >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:gravity="center"
-    android:background="#2980B9"
-    android:layout_height="match_parent"
-    android:id="@+id/groupName" >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Group Name"
-    android:paddingLeft="20dp"
-    android:paddingTop="30dp"
-    android:textSize="40dp"
-    android:layout_gravity="center_horizontal"
-    android:fontFamily="sans-serif-condensed"
-    android:id="@+id/group_name_text"
-    android:textColor="#fff"/>
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:layout_width="42dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/gear"
-            android:paddingTop="30dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:layout_gravity="end"
-            android:layout_marginStart="83dp"
-            android:id="@+id/account_settings_icon"
-            android:layout_weight="0.06" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/group_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingEnd="0dp"
+                android:paddingStart="20dp"
+                android:paddingTop="30dp"
+                android:text="Group Name"
+                android:textColor="#fff"
+                android:textSize="40sp"
+                tools:ignore="HardcodedText" />
+
+            <ImageButton
+                android:id="@+id/account_settings_icon"
+                android:layout_width="42dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginStart="83dp"
+                android:layout_weight="0.06"
+                android:background="@null"
+                android:contentDescription="Settings"
+                android:paddingTop="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/gear"
+                tools:ignore="HardcodedText,InefficientWeight" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/pointsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="450 Points"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            tools:ignore="HardcodedText" />
+
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/makeLeaderBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/peopleDisplay3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/user_emoji1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:contentDescription="Emoji"
+                        android:padding="10dp"
+                        app:srcCompat="@drawable/smiley3"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/person1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="User 1"
+                        android:padding="10dp"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/points1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="90 points"
+                        android:padding="10dp"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/peopleDisplay4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/user_emoji2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:contentDescription="Emoji"
+                        android:padding="10dp"
+                        app:srcCompat="@drawable/smiley3"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/person2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="User 2"
+                        android:padding="10dp"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/points2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:hint="90 points"
+                        android:padding="10dp"
+                        android:textSize="20sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/peopleDisplay5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/peopleDisplay6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/redeem_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:background="#A3E4D7"
+            android:text="Redeem"
+            android:textAllCaps="false"
+            android:textSize="30sp"
+            tools:ignore="HardcodedText" />
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="450 Points"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center_horizontal"
-        android:textSize="40dp"
-        android:fontFamily="sans-serif-condensed"
-        android:textColor="#fff"
-        android:id="@+id/pointsText"/>
-
-
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/makeLeaderBoard">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/peopleDisplay3"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/smiley3"
-                android:padding="10dp"
-                android:id="@+id/user_emoji1"
-                android:layout_weight="1">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:id="@+id/person1"
-                android:hint="User 1"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:id="@+id/points1"
-                android:hint="90 points"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/peopleDisplay4"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/smiley3"
-                android:id="@+id/user_emoji2"
-                android:padding="10dp"
-                android:layout_weight="1">
-            </ImageView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/person2"
-                android:padding="10dp"
-                android:hint="User 2"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/points2"
-                android:padding="10dp"
-                android:hint="90 points"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/peopleDisplay5"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/peopleDisplay6"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-
-    </LinearLayout>
-    </ScrollView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:text="Redeem"
-        android:layout_marginTop="70dp"
-        android:background="#A3E4D7"
-        android:textAllCaps="false"
-        android:id="@+id/redeem_button" />
-
-</LinearLayout>
-    </ScrollView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
