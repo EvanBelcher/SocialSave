@@ -16,11 +16,13 @@ public class RedemptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redemption);
+        /*
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         TextView textViewAmzn = (TextView) findViewById(R.id.amzn_points);
         ImageButton amznButton = (ImageButton) findViewById(R.id.amzn_button);
         ImageButton sjButton = (ImageButton) findViewById(R.id.sj_hosp_button);
         ImageButton wwfButton = (ImageButton) findViewById(R.id.wwf_button);
+        */
     }
 }

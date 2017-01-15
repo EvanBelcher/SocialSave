@@ -1,11 +1,15 @@
 package com.yesand.socialsave;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -39,9 +44,10 @@ import java.util.List;
 public class TransactionFragment extends TabMainFragment {
 
     private TextView dateOfTransaction;
-    private SwipeRefreshLayout refresher;
+    private MultiSwipeRefreshLayout refresher;
     private TextView titleTransaction;
     private TextView moneyTransaction;
+    private View view;
 
     @Nullable
     @Override
@@ -53,23 +59,55 @@ public class TransactionFragment extends TabMainFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        refreshPage();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
 
         moneyTransaction = (TextView) view.findViewById(R.id.moneyTransaction);
         dateOfTransaction = (TextView) view.findViewById(R.id.dateOfTransaction);
         titleTransaction = (TextView) view.findViewById(R.id.titleTransaction);
 
-        refresher = (SwipeRefreshLayout) view.findViewById(R.id.refreshView);
+        refresher = (MultiSwipeRefreshLayout) view.findViewById(R.id.refreshView);
         refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshPage();
             }
         });
+        refresher.setSwipeableChildren(R.id.transScrollView);
+
+
+//        final ViewTreeObserver vto = refresher.getViewTreeObserver();
+//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                // Calculate the trigger distance.
+//                float height = Float.parseFloat(String.valueOf(view.getHeight())) * 0.7f;
+//                Float mDistanceToTriggerSync = height;
+//                try {
+//                    // Set the internal trigger distance using reflection.
+//                    Field field = SwipeRefreshLayout.class.getDeclaredField("mDistanceToTriggerSync");
+//                    field.setAccessible(true);
+//                    System.out.println("HIT1");
+//                    field.setFloat(refresher, mDistanceToTriggerSync);
+//                    System.out.println(field.getFloat(refresher));
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                    System.out.println("HIT2");
+//                    refresher.setDistanceToTriggerSync((int) height);
+//                    System.out.println(height);
+//                }
+//
+//                // Only needs to be done once so remove listener.
+//                ViewTreeObserver obs = refresher.getViewTreeObserver();
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                    obs.removeOnGlobalLayoutListener(this);
+//                } else {
+//                    obs.removeGlobalOnLayoutListener(this);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -82,6 +120,9 @@ public class TransactionFragment extends TabMainFragment {
         ResourceManager.getCurrUser().child(Constants.NESSIE_ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+                moneyTransaction.setText("");
+                dateOfTransaction.setText("");
+                titleTransaction.setText("");
                 String customerId = (String) dataSnapshot.getValue();
                 RequestQueue queue = Volley.newRequestQueue(getContext());
                 String url = "http://api.reimaginebanking.com/customers/" + customerId + "/accounts?key=" + ResourceManager.getNessieKey();
@@ -109,7 +150,6 @@ public class TransactionFragment extends TabMainFragment {
                                             });
 
                                             for (Purchase purchase : purchases) {
-                                                System.out.println(purchase.getPurchaseDate());
                                                 dateOfTransaction.setText(purchase.getPurchaseDate() + "\n\n" + dateOfTransaction.getText() + "\n");
                                                 titleTransaction.setText(purchase.getDescription() + "\n\n" + titleTransaction.getText().toString() + "\n");
                                                 moneyTransaction.setText(ResourceManager.getMoneyFormatter().format(purchase.getAmount()) + "\n\n" + moneyTransaction.getText().toString());
