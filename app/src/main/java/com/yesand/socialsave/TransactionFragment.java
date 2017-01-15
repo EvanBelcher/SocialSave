@@ -1,15 +1,11 @@
 package com.yesand.socialsave;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +26,6 @@ import com.reimaginebanking.api.nessieandroidsdk.models.Purchase;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +42,6 @@ public class TransactionFragment extends TabMainFragment {
     private MultiSwipeRefreshLayout refresher;
     private TextView titleTransaction;
     private TextView moneyTransaction;
-    private View view;
 
     @Nullable
     @Override
@@ -62,7 +56,7 @@ public class TransactionFragment extends TabMainFragment {
     }
 
     @Override
-    public void onViewCreated(final View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
 
         moneyTransaction = (TextView) view.findViewById(R.id.moneyTransaction);
         dateOfTransaction = (TextView) view.findViewById(R.id.dateOfTransaction);
@@ -76,38 +70,6 @@ public class TransactionFragment extends TabMainFragment {
             }
         });
         refresher.setSwipeableChildren(R.id.transScrollView);
-
-
-//        final ViewTreeObserver vto = refresher.getViewTreeObserver();
-//        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                // Calculate the trigger distance.
-//                float height = Float.parseFloat(String.valueOf(view.getHeight())) * 0.7f;
-//                Float mDistanceToTriggerSync = height;
-//                try {
-//                    // Set the internal trigger distance using reflection.
-//                    Field field = SwipeRefreshLayout.class.getDeclaredField("mDistanceToTriggerSync");
-//                    field.setAccessible(true);
-//                    System.out.println("HIT1");
-//                    field.setFloat(refresher, mDistanceToTriggerSync);
-//                    System.out.println(field.getFloat(refresher));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    System.out.println("HIT2");
-//                    refresher.setDistanceToTriggerSync((int) height);
-//                    System.out.println(height);
-//                }
-//
-//                // Only needs to be done once so remove listener.
-//                ViewTreeObserver obs = refresher.getViewTreeObserver();
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                    obs.removeOnGlobalLayoutListener(this);
-//                } else {
-//                    obs.removeGlobalOnLayoutListener(this);
-//                }
-//            }
-//        });
     }
 
     @Override
