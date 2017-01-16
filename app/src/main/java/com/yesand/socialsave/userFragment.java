@@ -156,11 +156,18 @@ public class UserFragment extends TabMainFragment {
         ResourceManager.getCurrUser().child(Constants.HISTORY).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                @SuppressWarnings("unchecked") ArrayList<Long> objs = (dataSnapshot != null && dataSnapshot.getValue() != null) ? (ArrayList<Long>) dataSnapshot.getValue() : new ArrayList<Long>();
+                @SuppressWarnings("unchecked") List history = (dataSnapshot != null && dataSnapshot.getValue() != null) ? (ArrayList<Double>) dataSnapshot.getValue() : new ArrayList<Double>();
 
-                DataPoint[] points = new DataPoint[objs.size()];
-                for (int i = 0; i < objs.size(); i++) {
-                    points[i] = new DataPoint((double) i + 1, objs.get(i));
+                DataPoint[] points = new DataPoint[history.size()];
+                for (int i = 0; i < history.size(); i++) {
+                    double x = i + 1;
+                    double y = 0.0;
+                    if (history.get(i) instanceof Double)
+                        y = (Double) history.get(i);
+                    else if (history.get(i) instanceof Long)
+                        y = ((Long) history.get(i)).doubleValue();
+                    DataPoint dataPoint = new DataPoint(x, y);
+                    points[i] = dataPoint;
                 }
 
                 BarGraphSeries<DataPoint> series = new BarGraphSeries<>(points);
