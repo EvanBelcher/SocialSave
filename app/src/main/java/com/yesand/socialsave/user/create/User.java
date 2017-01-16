@@ -20,6 +20,7 @@ public class User {
     public int score;
     public List<Integer> scoreHistory;
     public int streak;
+    int totalSavings;
 
     public User()
     {
@@ -36,6 +37,9 @@ public class User {
         nextGoal = goal;
         score = 0;
         scoreHistory = new ArrayList<>(8);
+        for(int i = 0; i < scoreHistory.size(); i++)
+            scoreHistory.add(0);
         streak = 0;
+        totalSavings = 0;
     }
 }

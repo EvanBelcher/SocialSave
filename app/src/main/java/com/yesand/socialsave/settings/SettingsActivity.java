@@ -3,6 +3,8 @@ package com.yesand.socialsave.settings;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -95,6 +98,14 @@ public class SettingsActivity extends AppCompatActivity {
                             PopupWindow popupWindow = new SettingsPopupWindow("Enter a goal for <b>next week</b>", settingsActivity);
                             popupWindow.showAtLocation(parent, Gravity.TOP, 0, 0);
                             popupWindow.update(0, 0, parent.getWidth(), parent.getHeight());
+                        } else if (textView.getText().toString().contains("Group Id: ")) {
+                            ClipboardManager manager =
+                                    (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                            manager.setPrimaryClip(ClipData.newPlainText("SocialSave Group Key", textView.getText().toString().substring(10)));
+                            // Show a message:
+                            Toast.makeText(view.getContext(), "Your group key has been copied to the clipboard",
+                                    Toast.LENGTH_SHORT)
+                                    .show();
                         } else if (textView.getText().toString().contains("Notifications")) {
                             PopupWindow popupWindow = new SettingsPopupWindow("Turn Notifications Off?", settingsActivity);
                             popupWindow.showAtLocation(parent, Gravity.TOP, 0, 0);

@@ -22,6 +22,8 @@ import java.lang.ref.WeakReference;
 @SuppressWarnings("ConstantConditions")
 public class TabMainFragment extends Fragment {
 
+    View view;
+
     public final static String TAG = TabMainFragment.class.getSimpleName();
     private SocialPageAdapter pageAdapter;
 
@@ -30,7 +32,6 @@ public class TabMainFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // to save data with roation
         setRetainInstance(true);
-
     }
 
     @Nullable
@@ -49,6 +50,8 @@ public class TabMainFragment extends Fragment {
         }
 
         final Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        this.view = view;
+
         if (toolbar == null) {
             return;
         }
@@ -59,10 +62,8 @@ public class TabMainFragment extends Fragment {
         setUpTab_Layout(tabLayout);
         setUpViewPager(tabLayout, viewPager, toolbar);
         setupTabLayoutListener(toolbar, tabLayout, viewPager);
-        toolbar.setTitle(pageAdapter.getPageTitle(viewPager.getCurrentItem()));
         Log.e(TAG, viewPager.getCurrentItem() + "The CurrentItem");
         tabLayout.getTabAt(viewPager.getCurrentItem()).setIcon(ResourcesCompat.getDrawable(getResources(), pageAdapter.getIconHighLightAtPosition(viewPager.getCurrentItem()), null));
-
     }
 
     private void setUpTab_Layout(TabLayout tab_layout) {
