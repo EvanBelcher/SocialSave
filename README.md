@@ -13,13 +13,15 @@ We believe that the social aspect of SocialSave will inspire positive peer press
 Get SocialSaving today!
 
 ##Instructions
-**Assumes you have Android Studio**
 
-1. Open Android Studio to the Welcome Screen
-2. Click "Check out project from Version Control"
-3. Choose Git
-4. In the "Git Repository Url", copy-paste **https://github.com/YesAndApps/SocialSave.git**
-5. Run on a phone or emulator
+1. Come right back to this page on your Android-running mobile device.
+2. Tap "release" (hint: it's under the zingy slogan)
+3. Tap on the most recent "SocialSave.apk" to download
+4. Once you've finished downloading, tap on the file in your download manager or file manager.
+5. Tap "INSTALL" to install
+6. Enjoy!!!
+
+**Note: If you've never done this sort of thing before, you'll need to enable the installation of third party apps. Find out how to do so here: http://www.howtogeek.com/howto/41082/install-non-market-apps-on-your-android-device/**
 
 Creators: Evan Belcher, Nikhil Bhaip, Stephen Buttolph, Serina Chang, and Puyush Goel
 ![picture of creators](http://i.imgur.com/0kKDgCW.jpg "Pictured left to right: Stephen Buttolph, Puyush Goel, Serina Chang, Nikhil Bhaip, Evan Belcher")
